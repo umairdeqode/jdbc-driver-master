@@ -32,23 +32,14 @@ public class SkyflowDriverTest {
 		Driver driver = new SkyflowDriver();
 
 		try{
-				Connection con = driver.connect("jdbc:Skyflow:"+"/home/deq/IdeaProjects/jdbc-driver-master/vault:123", null);
+				Connection con = driver.connect("jdbc:Skyflow:"+"/home/deq/IdeaProjects/jdbc-driver-master/vault:u4882705de68469d92b5aa1d9ada9740", null);
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery("select * from template;");
 				 rs.getMetaData();
 		while (rs.next())System.out.println(rs.getString(1) + " - " + rs.getString(2)+ " - " + rs.getString(3));
 
 		}catch(Exception e) {
-
-//			assertTrue(rs.next());
-//			assertEquals("A", rs.getString(1));
-//			assertEquals("B", rs.getString(2));
-//
-//			assertTrue(rs.next());
-//			assertEquals("C", rs.getString(1));
-//			assertEquals("D", rs.getString(2));
-
-//			assertFalse(rs.next());
+			e.printStackTrace();
 		};
 	}
 

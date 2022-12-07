@@ -26,7 +26,7 @@ public class SkyflowDriver implements Driver {
 	public Connection connect(String s, Properties properties) throws SQLException {
 		//throw new SQLException(s);
 
-		System.out.println("****************************************** ->"+ s);
+		//System.out.println("****************************************** ->"+ s);
 		  String[] parts = s.split(":");
 		  
 		  if (parts.length < 2 || !parts[0].toLowerCase().equals("jdbc") ||

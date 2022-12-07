@@ -10,7 +10,7 @@ public class TokenGenUtil {
 
     public static String getBearerToken() {
         try {
-            System.out.println("Inside Token Gen Util ---------------------->");
+           // System.out.println("Inside Token Gen Util ---------------------->");
             String filePath = "/home/deq/IdeaProjects/jdbc-driver-master/vault/credentials.json";
              if(TokenExpiry.isExpiredToken(bearerToken)) {
                 ResponseToken response = TokenGenerator.generateBearerToken(filePath);
