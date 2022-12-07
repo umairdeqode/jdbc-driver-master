@@ -22,29 +22,24 @@ public class SkyflowDriverTest {
 
 	@Test
 	public void driver_works_in_normal_case() throws SQLException {
-		String resourceName = "test01.csv";
-
-		ClassLoader classLoader = getClass().getClassLoader();
-		String path = classLoader.getResource(resourceName).getPath();
-
-		String parent = Paths.get(path).getParent().toAbsolutePath().toString();
+		//String resourceName = "test01.csv";
+//
+//		ClassLoader classLoader = getClass().getClassLoader();
+//		String path = classLoader.getResource(resourceName).getPath();
+//
+//		String parent = Paths.get(path).getParent().toAbsolutePath().toString();
 
 		Driver driver = new SkyflowDriver();
 
-		try(
-				Connection con = driver.connect("jdbc:Skyflow:"+parent, null);
+		try{
+				Connection con = driver.connect("jdbc:Skyflow:"+"/home/deq/IdeaProjects/jdbc-driver-master/vault:u4882705de68469d92b5aa1d9ada9740", null);
 				Statement stmt = con.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT * FROM test01.csv;")
-		) {
-			assertTrue(rs.next());
-			assertEquals("A", rs.getString(1));
-			assertEquals("B", rs.getString(2));
+				ResultSet rs = stmt.executeQuery("select * from template;");
+				 rs.getMetaData();
+		while (rs.next())System.out.println(rs.getString(1) + " - " + rs.getString(2)+ " - " + rs.getString(3));
 
-			assertTrue(rs.next());
-			assertEquals("C", rs.getString(1));
-			assertEquals("D", rs.getString(2));
-
-			assertFalse(rs.next());
+		}catch(Exception e) {
+			e.printStackTrace();
 		};
 	}
 
