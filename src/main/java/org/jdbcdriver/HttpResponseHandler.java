@@ -30,14 +30,16 @@ import org.util.TokenGenUtil;
 //import org.json.simple.JSONObject;
 
 public class HttpResponseHandler{
+
 	
 	 public HttpResponseHandler() {}
     
     
     public JSONArray SendPost (String s) throws Exception {
-    	String token1 = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2MiOiJmNzk0ZmY4NmZiYzgxMWVhYmQ2YzNhOTExNDNlM2Q0MiIsImF1ZCI6Imh0dHBzOi8vbWFuYWdlLnNreWZsb3dhcGlzLmRldiIsImV4cCI6MTY3MjU4Mzg1MywiaWF0IjoxNjY5OTkxODUzLCJpc3MiOiJzYS1hdXRoQG1hbmFnZS5za3lmbG93YXBpcy5kZXYiLCJqdGkiOiJhNDliZjZiOGNhNjE0ZmFjODNhMGE5NmY2ZGRlZGJjMSIsInN1YiI6ImUzZWQ2YmE5OWY1NjQ1YzNiZjZmZGRhYmJiYmYzYzYyIn0.gMpiLGeHkzhx7bhk4lxg3CXvK7Re-hFQ0e9sHg8ogokmgJOHJa3M3iO1O1kFRR1OaABjYPOpD9iT2PbIGb3NvxWyl-av1co8AvNQKNmdsUXOn-NAkiva-3cy3dyhFfzqgMWxHBMhBpl5fIySkrAYjlFGG54Wc3QmcdCkqo2zxjJLgzyk9bDOcd5hoIdd9ePnWE4DWlk6F8fqYEVnTZg-Fa6nuPE0-rXAdfgngwC2H86Q4wc2XFFmBfmIJxUB7mwR6ySSC8woa5GYZ2is_xA3gVKjIzQ0ur9xD5Iqq0thoB2C8MP1OBv_OKJ8oBE_gGw_COubQfYByALAMNVFAd-hvg";
+    	//String token1 = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2MiOiJmNzk0ZmY4NmZiYzgxMWVhYmQ2YzNhOTExNDNlM2Q0MiIsImF1ZCI6Imh0dHBzOi8vbWFuYWdlLnNreWZsb3dhcGlzLmRldiIsImV4cCI6MTY3MjU4Mzg1MywiaWF0IjoxNjY5OTkxODUzLCJpc3MiOiJzYS1hdXRoQG1hbmFnZS5za3lmbG93YXBpcy5kZXYiLCJqdGkiOiJhNDliZjZiOGNhNjE0ZmFjODNhMGE5NmY2ZGRlZGJjMSIsInN1YiI6ImUzZWQ2YmE5OWY1NjQ1YzNiZjZmZGRhYmJiYmYzYzYyIn0.gMpiLGeHkzhx7bhk4lxg3CXvK7Re-hFQ0e9sHg8ogokmgJOHJa3M3iO1O1kFRR1OaABjYPOpD9iT2PbIGb3NvxWyl-av1co8AvNQKNmdsUXOn-NAkiva-3cy3dyhFfzqgMWxHBMhBpl5fIySkrAYjlFGG54Wc3QmcdCkqo2zxjJLgzyk9bDOcd5hoIdd9ePnWE4DWlk6F8fqYEVnTZg-Fa6nuPE0-rXAdfgngwC2H86Q4wc2XFFmBfmIJxUB7mwR6ySSC8woa5GYZ2is_xA3gVKjIzQ0ur9xD5Iqq0thoB2C8MP1OBv_OKJ8oBE_gGw_COubQfYByALAMNVFAd-hvg";
 
 		String token2 = null;
+		String vaultId = null;
 		try {
 			token2 = TokenGenUtil.getBearerToken();
 			System.out.println("************%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
@@ -49,8 +51,12 @@ public class HttpResponseHandler{
 			e.printStackTrace();
 		}
 
-		//URL url = new URL("https://sb.area51.vault.skyflowapis.dev/v1/vaults/h54b9fa800cc4916974fdc7407463783/query");
-        URL url = new URL("https://sb.area51.vault.skyflowapis.dev/v1/vaults/u4882705de68469d92b5aa1d9ada9740/query");
+		vaultId = SkyflowDriver.vaultId;
+		System.out.println("Parsed VaultId ->"+ vaultId);
+		vaultId = "u4882705de68469d92b5aa1d9ada9740";
+		String uri = "https://sb.area51.vault.skyflowapis.dev/v1/vaults/" + vaultId +"/query";
+        URL url = new URL(uri);
+		System.out.println("Uri ->" + uri);
 
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
         conn.setRequestMethod("POST");

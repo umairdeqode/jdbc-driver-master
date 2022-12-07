@@ -31,11 +31,15 @@ public class SkyflowDriverTest {
 
 		Driver driver = new SkyflowDriver();
 
-		try(
-				Connection con = driver.connect("jdbc:Skyflow:"+"/home/deq/IdeaProjects/jdbc-driver-master/vault", null);
+		try{
+				Connection con = driver.connect("jdbc:Skyflow:"+"/home/deq/IdeaProjects/jdbc-driver-master/vault:123", null);
 				Statement stmt = con.createStatement();
-				ResultSet rs = stmt.executeQuery("select id1 from template;")
-		) {
+				ResultSet rs = stmt.executeQuery("select * from template;");
+				 rs.getMetaData();
+		while (rs.next())System.out.println(rs.getString(1) + " - " + rs.getString(2)+ " - " + rs.getString(3));
+
+		}catch(Exception e) {
+
 //			assertTrue(rs.next());
 //			assertEquals("A", rs.getString(1));
 //			assertEquals("B", rs.getString(2));
