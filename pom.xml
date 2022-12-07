@@ -45,7 +45,16 @@
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
       <version>2.10</version>
-    </dependency>      
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.skyflow/skyflow-java -->
+    <dependency>
+      <groupId>com.skyflow</groupId>
+      <artifactId>skyflow-java</artifactId>
+      <version>1.7.1</version>
+    </dependency>
+
+
     <dependency>
       <groupId>com.google.api-client</groupId>
       <artifactId>google-api-client</artifactId>
@@ -68,11 +77,18 @@
           </execution>
         </executions>
         <configuration>
+          <archive>
+            <manifest>
+              <mainClass>fully.qualified.MainClass</mainClass>
+            </manifest>
+          </archive>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
           </descriptorRefs>
         </configuration>
       </plugin>
+
+
       
       
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->

@@ -17,12 +17,15 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.GeneralSecurityException;
+import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.util.TokenGenUtil;
+//import org.util.TokenGenerationUtil;
 
 //import org.json.simple.JSONObject;
 
@@ -33,14 +36,28 @@ public class HttpResponseHandler{
     
     public JSONArray SendPost (String s) throws Exception {
     	String token1 = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2MiOiJmNzk0ZmY4NmZiYzgxMWVhYmQ2YzNhOTExNDNlM2Q0MiIsImF1ZCI6Imh0dHBzOi8vbWFuYWdlLnNreWZsb3dhcGlzLmRldiIsImV4cCI6MTY3MjU4Mzg1MywiaWF0IjoxNjY5OTkxODUzLCJpc3MiOiJzYS1hdXRoQG1hbmFnZS5za3lmbG93YXBpcy5kZXYiLCJqdGkiOiJhNDliZjZiOGNhNjE0ZmFjODNhMGE5NmY2ZGRlZGJjMSIsInN1YiI6ImUzZWQ2YmE5OWY1NjQ1YzNiZjZmZGRhYmJiYmYzYzYyIn0.gMpiLGeHkzhx7bhk4lxg3CXvK7Re-hFQ0e9sHg8ogokmgJOHJa3M3iO1O1kFRR1OaABjYPOpD9iT2PbIGb3NvxWyl-av1co8AvNQKNmdsUXOn-NAkiva-3cy3dyhFfzqgMWxHBMhBpl5fIySkrAYjlFGG54Wc3QmcdCkqo2zxjJLgzyk9bDOcd5hoIdd9ePnWE4DWlk6F8fqYEVnTZg-Fa6nuPE0-rXAdfgngwC2H86Q4wc2XFFmBfmIJxUB7mwR6ySSC8woa5GYZ2is_xA3gVKjIzQ0ur9xD5Iqq0thoB2C8MP1OBv_OKJ8oBE_gGw_COubQfYByALAMNVFAd-hvg";
-        //URL url = new URL("https://sb.area51.vault.skyflowapis.dev/v1/vaults/h54b9fa800cc4916974fdc7407463783/query");
+
+		String token2 = null;
+		try {
+			token2 = TokenGenUtil.getBearerToken();
+			System.out.println("************%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+			System.out.println(token2);
+			System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+		} catch (Exception e) {
+			System.out.println("Not able to generate token properly");
+			System.out.println(token2);
+			e.printStackTrace();
+		}
+
+		//URL url = new URL("https://sb.area51.vault.skyflowapis.dev/v1/vaults/h54b9fa800cc4916974fdc7407463783/query");
         URL url = new URL("https://sb.area51.vault.skyflowapis.dev/v1/vaults/u4882705de68469d92b5aa1d9ada9740/query");
 
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
         conn.setRequestMethod("POST");
         //String authString = "Bearer " + Base64.getEncoder().withoutPadding().encodeToString(token.getBytes("utf-8"));
-        String authString = "Bearer " + token1;
+        String authString = "Bearer " + token2;
         conn.setRequestProperty("Authorization", authString);
+		//conn.setRequestProperty("Authorization", token2);
         conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         conn.setRequestProperty("Content-Type", "application/json");
         conn.setDoOutput(true);
