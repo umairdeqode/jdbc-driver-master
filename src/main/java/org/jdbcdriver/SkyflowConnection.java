@@ -20,9 +20,9 @@ import java.util.Properties;
 import java.util.concurrent.Executor;
 
 public class SkyflowConnection implements java.sql.Connection {
-	private Path directory;
+	private String directory;
 
-	SkyflowConnection(Path directory) {
+	SkyflowConnection(String directory) {
 		this.directory = directory;
 	}
 
@@ -79,7 +79,7 @@ public class SkyflowConnection implements java.sql.Connection {
 	@Override
 	public DatabaseMetaData getMetaData() throws SQLException {
 		//throw new SQLException("MY ERROR1");
-		return null;
+		return new org.jdbcdriver.DatabaseMetaData(this);
 	}
 
 	@Override

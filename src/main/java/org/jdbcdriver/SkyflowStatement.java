@@ -16,12 +16,20 @@ import org.json.JSONArray;
 //import com.google.gson.JsonArray;
 
 public class SkyflowStatement implements Statement {
-	private Path directory;
+	private String directory;
 	String str;
 	private int i;
-	SkyflowStatement(Path directory) {
+	SkyflowStatement(String directory) {
 		this.directory = directory;
 		this.i=0;
+	}
+	
+	public SkyflowStatement() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public String sendString() {
+		return this.str;
 	}
 
 	@Override

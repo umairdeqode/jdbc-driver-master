@@ -38,6 +38,10 @@ public class SkyflowResultSet implements ResultSet {
 	private static final String FIELD_SEPARATOR = ";";
 	private Iterator<Object> iterator;
 	private List<String> record = null;
+	
+	public SkyflowResultSet() {
+		
+	}
 
 	public SkyflowResultSet(JSONArray response) {
 		iterator = response.iterator();

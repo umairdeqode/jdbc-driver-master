@@ -1,11 +1,27 @@
 package org.jdbcdriver;
 
+import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.RowIdLifetime;
 import java.sql.SQLException;
-public class DatabaseMetaData implements java.sql.DatabaseMetaData {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import org.ietf.jgss.Oid;
+
+public class DatabaseMetaData implements java.sql.DatabaseMetaData {
+	
+	public static int maxBufferSize = 65535;
+	public SkyflowConnection conn;
+	
+	public DatabaseMetaData(SkyflowConnection a) {
+		this.conn=a;
+	}
+	
 	@Override
 	public <T> T unwrap(Class<T> iface) throws SQLException {
 		// TODO Auto-generated method stub
@@ -87,7 +103,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
 	@Override
 	public String getDriverName() throws SQLException {
 		// TODO Auto-generated method stub
-		return "Skyflow";
+		return "SkyflowDriver";
 	}
 
 	@Override
@@ -183,55 +199,61 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
 	@Override
 	public String getNumericFunctions() throws SQLException {
 		// TODO Auto-generated method stub
-		return null;
+		return "ABS,ACOS,ASIN,ATAN,ATAN2,BIT_COUNT,CEILING,COS,COT,DEGREES,EXP,FLOOR,LOG,LOG10,MAX,MIN,MOD,PI,POW,"
+        + "POWER,RADIANS,RAND,ROUND,SIN,SQRT,TAN,TRUNCATE";
 	}
 
 	@Override
 	public String getStringFunctions() throws SQLException {
 		// TODO Auto-generated method stub
-		return null;
+		return "ASCII,BIN,BIT_LENGTH,CHAR,CHARACTER_LENGTH,CHAR_LENGTH,CONCAT,CONCAT_WS,CONV,ELT,EXPORT_SET,FIELD,FIND_IN_SET,HEX,INSERT,"
+        + "INSTR,LCASE,LEFT,LENGTH,LOAD_FILE,LOCATE,LOCATE,LOWER,LPAD,LTRIM,MAKE_SET,MATCH,MID,OCT,OCTET_LENGTH,ORD,POSITION,"
+        + "QUOTE,REPEAT,REPLACE,REVERSE,RIGHT,RPAD,RTRIM,SOUNDEX,SPACE,STRCMP,SUBSTRING,SUBSTRING,SUBSTRING,SUBSTRING,"
+        + "SUBSTRING_INDEX,TRIM,UCASE,UPPER";
 	}
 
 	@Override
 	public String getSystemFunctions() throws SQLException {
 		// TODO Auto-generated method stub
-		return null;
+		return "DATABASE,USER,SYSTEM_USER,SESSION_USER,PASSWORD,ENCRYPT,LAST_INSERT_ID,VERSION";
 	}
 
 	@Override
 	public String getTimeDateFunctions() throws SQLException {
 		// TODO Auto-generated method stub
-		return null;
+		return "DAYOFWEEK,WEEKDAY,DAYOFMONTH,DAYOFYEAR,MONTH,DAYNAME,MONTHNAME,QUARTER,WEEK,YEAR,HOUR,MINUTE,SECOND,PERIOD_ADD,"
+                + "PERIOD_DIFF,TO_DAYS,FROM_DAYS,DATE_FORMAT,TIME_FORMAT,CURDATE,CURRENT_DATE,CURTIME,CURRENT_TIME,NOW,SYSDATE,"
+                + "CURRENT_TIMESTAMP,UNIX_TIMESTAMP,FROM_UNIXTIME,SEC_TO_TIME,TIME_TO_SEC";
 	}
 
 	@Override
 	public String getSearchStringEscape() throws SQLException {
 		// TODO Auto-generated method stub
-		return null;
+		return "\\";
 	}
 
 	@Override
 	public String getExtraNameCharacters() throws SQLException {
 		// TODO Auto-generated method stub
-		return null;
+		return "#@";
 	}
 
 	@Override
 	public boolean supportsAlterTableWithAddColumn() throws SQLException {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean supportsAlterTableWithDropColumn() throws SQLException {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean supportsColumnAliasing() throws SQLException {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -279,7 +301,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
 	@Override
 	public boolean supportsGroupBy() throws SQLException {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -381,8 +403,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
 	@Override
 	public String getSchemaTerm() throws SQLException {
 		// TODO Auto-generated method stub
-		throw new SQLException("getSchemaTerm");
-		//return null;
+		return "schema";
 	}
 
 	@Override
@@ -395,7 +416,7 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
 	@Override
 	public String getCatalogTerm() throws SQLException {
 		// TODO Auto-generated method stub
-		return null;
+		return "database";
 	}
 
 	@Override
@@ -563,49 +584,49 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
 	@Override
 	public int getMaxBinaryLiteralLength() throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		return 16777208;
 	}
 
 	@Override
 	public int getMaxCharLiteralLength() throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		return 16777208;
 	}
 
 	@Override
 	public int getMaxColumnNameLength() throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		return 64;
 	}
 
 	@Override
 	public int getMaxColumnsInGroupBy() throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		return 64;
 	}
 
 	@Override
 	public int getMaxColumnsInIndex() throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		return 16;
 	}
 
 	@Override
 	public int getMaxColumnsInOrderBy() throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		return 64;
 	}
 
 	@Override
 	public int getMaxColumnsInSelect() throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		return 256;
 	}
 
 	@Override
 	public int getMaxColumnsInTable() throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		return 512;
 	}
 
 	@Override
@@ -617,13 +638,13 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
 	@Override
 	public int getMaxCursorNameLength() throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		return 64;
 	}
 
 	@Override
 	public int getMaxIndexLength() throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		return 256;
 	}
 
 	@Override
@@ -641,25 +662,25 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
 	@Override
 	public int getMaxCatalogNameLength() throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		return 32;
 	}
 
 	@Override
 	public int getMaxRowSize() throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		return Integer.MAX_VALUE - 8; // Max buffer size - HEADER
 	}
 
 	@Override
 	public boolean doesMaxRowSizeIncludeBlobs() throws SQLException {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public int getMaxStatementLength() throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		return  maxBufferSize - 4; // Max buffer - header
 	}
 
 	@Override
@@ -671,31 +692,31 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
 	@Override
 	public int getMaxTableNameLength() throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		return 64;
 	}
 
 	@Override
 	public int getMaxTablesInSelect() throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		return 256;
 	}
 
 	@Override
 	public int getMaxUserNameLength() throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		return 16;
 	}
 
 	@Override
 	public int getDefaultTransactionIsolation() throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		return java.sql.Connection.TRANSACTION_REPEATABLE_READ;
 	}
 
 	@Override
 	public boolean supportsTransactions() throws SQLException {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -732,53 +753,63 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
 	public ResultSet getProcedures(String catalog, String schemaPattern, String procedureNamePattern)
 			throws SQLException {
 		// TODO Auto-generated method stub
-		throw new SQLException("getProcedures");
-		//return null;
+		return null;
 	}
 
 	@Override
 	public ResultSet getProcedureColumns(String catalog, String schemaPattern, String procedureNamePattern,
 			String columnNamePattern) throws SQLException {
 		// TODO Auto-generated method stub
-		throw new SQLException("getProcedureColumns");
-		//return null;
+		return null;
 	}
 
 	@Override
 	public ResultSet getTables(String catalog, String schemaPattern, String tableNamePattern, String[] types)
 			throws SQLException {
 		// TODO Auto-generated method stub
-		throw new SQLException("getTables");
-		//return null;
+		//throw new SQLException("getTables");
+		/*String A[]=new String[1];
+		A[0]="My Table";*/
+		SkyflowStatement b=new SkyflowStatement();
+		String s=b.sendString();
+		HttpResponseHandler a=new HttpResponseHandler();
+		try {
+			return new SkyflowResultSet(a.SendPost(s));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override
 	public ResultSet getSchemas() throws SQLException {
 		// TODO Auto-generated method stub
-		throw new SQLException("getSchemas");
-		//return null;
+		//throw new SQLException("getTables");
+		return new SkyflowResultSet();
 	}
 
 	@Override
 	public ResultSet getCatalogs() throws SQLException {
 		// TODO Auto-generated method stub
-		throw new SQLException("getCatalogs");
-		//return null;
+		throw new SQLException("getCatalogs"); 
+		//return new SkyflowResultSet();
 	}
 
 	@Override
 	public ResultSet getTableTypes() throws SQLException {
 		// TODO Auto-generated method stub
-		throw new SQLException("getTableTypes");
-		//return null;
+		throw new SQLException("getTableTypes"); 
+		
+		//return new SkyflowResultSet();
 	}
 
 	@Override
 	public ResultSet getColumns(String catalog, String schemaPattern, String tableNamePattern, String columnNamePattern)
 			throws SQLException {
 		// TODO Auto-generated method stub
-		throw new SQLException("getColumns");
-		//return null;
+		throw new SQLException("getColumns"); 
+		//return new SkyflowResultSet();
 	}
 
 	@Override
@@ -940,7 +971,8 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
 	public Connection getConnection() throws SQLException {
 		// TODO Auto-generated method stub
 		throw new SQLException("getConnection");
-		//return null;
+		//return this.conn;
+		// to change
 	}
 
 	@Override
@@ -1016,19 +1048,19 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
 	@Override
 	public int getJDBCMajorVersion() throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		return 4;
 	}
 
 	@Override
 	public int getJDBCMinorVersion() throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		return 2;
 	}
 
 	@Override
 	public int getSQLStateType() throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		return java.sql.DatabaseMetaData.sqlStateSQL99;
 	}
 
 	@Override
