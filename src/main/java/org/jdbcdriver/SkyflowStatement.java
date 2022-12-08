@@ -17,23 +17,26 @@ import org.json.JSONArray;
 
 public class SkyflowStatement implements Statement {
 	private Path directory;
+	private String vaultId;
+
+	private String filePath;
 	String str;
-	private int i;
-	SkyflowStatement(Path directory) {
+	//private int i;
+	SkyflowStatement(Path directory,String vaultId,String filePath) {
 		this.directory = directory;
-		this.i=0;
+		this.vaultId = vaultId;
+		this.filePath = filePath;
+		//this.i=0;
 	}
 
 	@Override
 	public ResultSet executeQuery(String s)  throws SQLException{
-		//throw new SQLException(s);
 		str=s;
 		HttpResponseHandler httpResponseHandler = new HttpResponseHandler();
 		try {
-			JSONArray response= httpResponseHandler.SendPost(s);
+			JSONArray response= httpResponseHandler.SendPost(s,this.vaultId,this.filePath);
 			return new SkyflowResultSet(response); 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		  return null;

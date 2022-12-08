@@ -1,5 +1,6 @@
 package org.jdbcdriver;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,10 +16,11 @@ import java.util.Stack;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import static org.util.Constants.CREDENTIALS_FILE_NAME;
+
 public class SkyflowDriver implements Driver {
 	private static final Driver INSTANCE = new SkyflowDriver();
-
-	public static String vaultId = null;
+	//public static String credsPath = null;
 	private static boolean registered;
 	public SkyflowDriver() {}
 
@@ -26,26 +28,33 @@ public class SkyflowDriver implements Driver {
 	public Connection connect(String s, Properties properties) throws SQLException {
 		//throw new SQLException(s);
 
-		//System.out.println("****************************************** ->"+ s);
+		  String vaultId;
+		  String credsPath;
+
 		  String[] parts = s.split(":");
 		  
 		  if (parts.length < 2 || !parts[0].toLowerCase().equals("jdbc") ||
 		  !parts[1].toLowerCase().equals("skyflow")) return null;
-		  
-//		  String directory =
-//		  Arrays.stream(parts).skip(2).collect(Collectors.joining(":"));
+
+		  if(parts.length<4) throw new SQLException("Vault Id is not passed or incorrect");
+		  else vaultId = parts[3];
 
 		  String directory = parts[2];
-		  vaultId = parts[3];
 		  System.out.println("dir ->" + directory);
 		  System.out.println("vaultId ->"+ vaultId);
 
 		  Path path = Paths.get(directory).toAbsolutePath();
+		  //System.out.println(path.toString());
+
+
+		  if (!Files.isDirectory(path)) throw new SQLException("'" + path + "' is not a directory");
+		  credsPath = directory;
+		System.out.println(path.toString()+CREDENTIALS_FILE_NAME);
+
+		boolean flag= new File(path.toString()+CREDENTIALS_FILE_NAME).isFile();
+		if(flag == false) throw new SQLException("Credentials file does not exists.");
 		  
-		  if (!Files.isDirectory(path)) throw new SQLException("'" + path +
-		  "' is not a directory");
-		  
-		  return new SkyflowConnection(path);
+		return new SkyflowConnection(path,vaultId,credsPath);
 		 
 	}
 
