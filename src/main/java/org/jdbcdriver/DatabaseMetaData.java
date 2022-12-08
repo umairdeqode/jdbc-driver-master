@@ -18,8 +18,8 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
 	public static int maxBufferSize = 65535;
 	public SkyflowConnection conn;
 	
-	public DatabaseMetaData(SkyflowConnection a) {
-		this.conn=a;
+	public DatabaseMetaData(SkyflowConnection skyflowConnection) {
+		this.conn=skyflowConnection;
 	}
 	
 	@Override
@@ -770,11 +770,11 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
 		//throw new SQLException("getTables");
 		/*String A[]=new String[1];
 		A[0]="My Table";*/
-		SkyflowStatement b=new SkyflowStatement();
-		String s=b.sendString();
-		HttpResponseHandler a=new HttpResponseHandler();
+		SkyflowStatement skyflowStatement=new SkyflowStatement();
+		String statement=skyflowStatement.sendString();
+		HttpResponseHandler httpResponseHandler=new HttpResponseHandler();
 		try {
-			return new SkyflowResultSet(a.SendPost(s));
+			return new SkyflowResultSet(httpResponseHandler.SendPost(statement));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
