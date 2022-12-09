@@ -13,7 +13,7 @@ public class ResultSetMetaData implements java.sql.ResultSetMetaData {
 	 //ArrayList<String> A;
 	
 		
-		  public ResultSetMetaData() {
+		  public ResultSetMetaData() throws SQLException {
 		  
 				/*
 				 * this.A =new ArrayList<String>();
@@ -21,6 +21,7 @@ public class ResultSetMetaData implements java.sql.ResultSetMetaData {
 				 * this.A.add(null); this.A.add("id1"); this.A.add("id2"); this.A.add("id3");
 				 * this.A.add("name"); this.A.add("name2"); this.A.add("skyflow_id");
 				 */
+				throw new SQLException("no value");
 		  
 		  }
 		 

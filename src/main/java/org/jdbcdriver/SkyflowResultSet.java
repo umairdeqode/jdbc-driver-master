@@ -32,7 +32,7 @@ import java.util.stream.Stream;
 import org.jdbcdriver.DatabaseMetaData;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
+import java.util.Collections;
 
 public class SkyflowResultSet implements ResultSet {
 	private static final String FIELD_SEPARATOR = ";";
@@ -40,7 +40,8 @@ public class SkyflowResultSet implements ResultSet {
 	private List<String> record = null;
 	
 	public SkyflowResultSet() {
-		
+		record= new ArrayList<>();
+		iterator = Collections.emptyIterator();
 	}
 
 	public SkyflowResultSet(JSONArray response) {
@@ -54,7 +55,7 @@ public class SkyflowResultSet implements ResultSet {
 		if (iterator.hasNext()) {
 			
 			JSONObject obj = (JSONObject) iterator.next();
-			JSONObject tempobj = (JSONObject) obj.get("fields");
+			JSONObject tempobj =  obj.has("fields")  ? (JSONObject) obj.get("fields") : obj;
 			Set<String> s= tempobj.keySet();
 
 		    Iterator<String> i = s.iterator();
@@ -177,7 +178,7 @@ public class SkyflowResultSet implements ResultSet {
 
 	@Override
 	public String getString(String s) throws SQLException {
-		throw new SQLException("getString"); 
+		return this.record.get(0);
 		//return 0;
 	}
 
@@ -295,7 +296,7 @@ public class SkyflowResultSet implements ResultSet {
 		if (iterator.hasNext()) {
 			
 			JSONObject obj = (JSONObject) iterator.next();
-			JSONObject tempobj = (JSONObject) obj.get("fields");
+			JSONObject tempobj = obj.has("fields") ? (JSONObject) obj.get("fields") : obj ;
 			s= tempobj.keySet();
 			}
 		temp.addAll(s);
@@ -303,9 +304,7 @@ public class SkyflowResultSet implements ResultSet {
 		//throw new SQLException("MY ERROR2");
 		System.out.println(".............");
 		System.out.println(A.getColumnCount());
-		System.out.println(A.getColumnName(1));
-		System.out.println(A.getCatalogName(1));
-		System.out.println(A.getTableName(1));
+
 		System.out.println(".............");
 		return A;
 	}

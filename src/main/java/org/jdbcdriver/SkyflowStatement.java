@@ -22,9 +22,11 @@ public class SkyflowStatement implements Statement {
 	SkyflowStatement(String directory) {
 		this.directory = directory;
 		this.i=0;
+		this.str ="select * from template;";
 	}
 	
 	public SkyflowStatement() {
+		this.str ="select * from template;";
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -34,8 +36,13 @@ public class SkyflowStatement implements Statement {
 
 	@Override
 	public ResultSet executeQuery(String s)  throws SQLException{
-		//throw new SQLException(s);
+		if(1==0){
+			throw new SQLException(s);}
 		str=s;
+
+		if( ! s.contains("from")){
+			return new SkyflowResultSet();
+		}
 		HttpResponseHandler httpResponseHandler = new HttpResponseHandler();
 		try {
 			JSONArray response= httpResponseHandler.SendPost(s);
@@ -126,6 +133,11 @@ public class SkyflowStatement implements Statement {
 	@Override
 	public boolean execute(String s) throws SQLException {
 		this.str=s;
+
+		if(! s.contains("from")){
+			this.str ="select * from template;";
+			//throw new SQLException(s);
+		}
 		//throw new SQLException("error1");
 		return true;
 	}
