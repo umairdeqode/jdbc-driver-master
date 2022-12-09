@@ -16,8 +16,21 @@ import org.json.JSONArray;
 //import com.google.gson.JsonArray;
 
 public class SkyflowStatement implements Statement {
-	private String directory;
+
+	private Path directory;
+	private String vaultId;
+
+	private String filePath;
 	String str;
+	//private int i;
+	SkyflowStatement(Path directory,String vaultId,String filePath) {
+		this.directory = directory;
+		this.vaultId = vaultId;
+		this.filePath = filePath;
+		//this.i=0;
+  }
+
+	private String directory;
 	private int i;
 	SkyflowStatement(String directory) {
 		this.directory = directory;
@@ -32,12 +45,15 @@ public class SkyflowStatement implements Statement {
 	
 	public String sendString() {
 		return this.str;
+
 	}
 
 	@Override
 	public ResultSet executeQuery(String s)  throws SQLException{
+
 		if(1==0){
 			throw new SQLException(s);}
+
 		str=s;
 
 		if( ! s.contains("from")){
@@ -45,10 +61,9 @@ public class SkyflowStatement implements Statement {
 		}
 		HttpResponseHandler httpResponseHandler = new HttpResponseHandler();
 		try {
-			JSONArray response= httpResponseHandler.SendPost(s);
+			JSONArray response= httpResponseHandler.SendPost(s,this.vaultId,this.filePath);
 			return new SkyflowResultSet(response); 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		  return null;

@@ -20,15 +20,37 @@ import java.util.Properties;
 import java.util.concurrent.Executor;
 
 public class SkyflowConnection implements java.sql.Connection {
-	private String directory;
+
+	private Path directory;
+	private String vaultId;
+	private String filePath;
+  private String directory1;
+
+	SkyflowConnection(Path directory,String vaultId,String filePath) {
+    this.directory = directory;
+		this.vaultId = vaultId;
+		this.filePath = filePath;
+  }
+
+	
 
 	SkyflowConnection(String directory) {
-		this.directory = directory;
+
+		this.directory1 = directory;
+		
+	}
+
+	public String getVaultId() {
+		return vaultId;
+	}
+
+	public void setVaultId(String vaultId) {
+		this.vaultId = vaultId;
 	}
 
 	@Override
 	public Statement createStatement() throws SQLException {
-		return new SkyflowStatement(directory);
+		return new SkyflowStatement(directory,vaultId,filePath);
 	}
 
 	@Override

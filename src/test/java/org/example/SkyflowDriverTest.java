@@ -32,9 +32,13 @@ public class SkyflowDriverTest {
 		Driver driver = new SkyflowDriver();
 
 		try{
-				Connection con = driver.connect("jdbc:Skyflow:"+"/home/deq/IdeaProjects/jdbc-driver-master/vault:u4882705de68469d92b5aa1d9ada9740", null);
+			    //:u4882705de68469d92b5aa1d9ada9740
+			    String dirPath = "/home/deq/IdeaProjects/jdbc-driver-master/vault:";
+				String vaultId = "u4882705de68469d92b5aa1d9ada9740";
+				Connection con = driver.connect("jdbc:Skyflow:"+ dirPath + vaultId, null);
 				Statement stmt = con.createStatement();
-				ResultSet rs = stmt.executeQuery("select * from template;");
+			//	ResultSet rs = stmt.executeQuery("select * from template;");
+			ResultSet rs = stmt.executeQuery("select * from template;");
 				 rs.getMetaData();
 		while (rs.next())System.out.println(rs.getString(1) + " - " + rs.getString(2)+ " - " + rs.getString(3));
 
