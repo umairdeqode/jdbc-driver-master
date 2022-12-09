@@ -20,8 +20,8 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
 	public static int maxBufferSize = 65535;
 	public SkyflowConnection conn;
 	
-	public DatabaseMetaData(SkyflowConnection a) {
-		this.conn=a;
+	public DatabaseMetaData(SkyflowConnection skyflowConnection) {
+		this.conn=skyflowConnection;
 	}
 	
 	@Override

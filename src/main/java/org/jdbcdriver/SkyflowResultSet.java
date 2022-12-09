@@ -300,13 +300,13 @@ public class SkyflowResultSet implements ResultSet {
 			s= tempobj.keySet();
 			}
 		temp.addAll(s);
-		org.jdbcdriver.ResultSetMetaData A=new org.jdbcdriver.ResultSetMetaData(temp);
+		org.jdbcdriver.ResultSetMetaData resultSetMetaData=new org.jdbcdriver.ResultSetMetaData(temp);
 		//throw new SQLException("MY ERROR2");
 		System.out.println(".............");
 		System.out.println(A.getColumnCount());
 
 		System.out.println(".............");
-		return A;
+		return resultSetMetaData;
 	}
 
 	@Override

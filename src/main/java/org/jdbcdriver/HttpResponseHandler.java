@@ -18,6 +18,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -127,10 +128,13 @@ public class HttpResponseHandler{
 	        String responsePost = sb.toString();
 	       
 	        JSONObject obj = new JSONObject(responsePost.toString());
-	        JSONArray arr = obj.getJSONArray("vault");
+	        JSONArray arr = obj.getJSONObject("vault").getJSONArray("schemas");
+	        Iterator<Object> iterator = arr.iterator();
+	        JSONObject obj1 = (JSONObject) iterator.next();
+	        JSONArray arr1= obj1.getJSONArray("fields");
 	       
 			conn.disconnect();
-			 return arr;
+			 return arr1;
 
 		  } catch (MalformedURLException e) {
 

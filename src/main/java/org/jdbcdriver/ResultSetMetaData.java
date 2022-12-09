@@ -4,11 +4,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.Iterator;
 
 
 public class ResultSetMetaData implements java.sql.ResultSetMetaData {	
-	List A;
+	List columnNames;
 	
 	 //ArrayList<String> A;
 	
@@ -26,8 +30,8 @@ public class ResultSetMetaData implements java.sql.ResultSetMetaData {
 		  }
 		 
 	 
-	 public ResultSetMetaData(List s) {
-		 this.A =s;
+	 public ResultSetMetaData(List columnNames) {
+		 this.columnNames=columnNames;
 		 
 	 }
 
@@ -46,7 +50,7 @@ public class ResultSetMetaData implements java.sql.ResultSetMetaData {
 	@Override
 	public int getColumnCount() throws SQLException {
 		// TODO Auto-generated method stub
-		return A.size();
+		return columnNames.size();
 	}
 
 	@Override
@@ -95,14 +99,14 @@ public class ResultSetMetaData implements java.sql.ResultSetMetaData {
 	public String getColumnLabel(int column) throws SQLException {
 		// TODO Auto-generated method stub
 		//throw new SQLException("getColumnLabel");
-		return (String) this.A.get(column-1);
+		return (String) this.columnNames.get(column-1);
 	}
 
 	@Override
 	public String getColumnName(int column) throws SQLException {
 		// TODO Auto-generated method stub
 		//throw new SQLException("getColumnName");
-		return (String) this.A.get(column-1);
+		return (String) this.columnNames.get(column-1);
 	}
 
 	@Override
@@ -142,15 +146,33 @@ public class ResultSetMetaData implements java.sql.ResultSetMetaData {
 	public int getColumnType(int column) throws SQLException {
 		// TODO Auto-generated method stub
 		//throw new SQLException("getColumnType");
-		return 12;
+		return (Integer) new DataTypesDynamicMapper().getDataTypeCodes().get(getColumnTypeName(column));
 	}
 
 	@Override
 	public String getColumnTypeName(int column) throws SQLException {
 		// TODO Auto-generated method stub
 		//throw new SQLException("getColumnTypeName");
-		return "Varchar";
-	}
+		HttpResponseHandler httpResponseHandler = new HttpResponseHandler();
+		JSONArray response=httpResponseHandler.SendGet();
+		Iterator<Object> iterator = response.iterator();
+		do {
+			JSONObject obj=(JSONObject) iterator.next();
+		    String skyflowDatatype=obj.get("datatype").toString();
+		    if(skyflowDatatype.toLowerCase().contains("int")) {
+		    	return "Integer";
+		    }
+		    else if(skyflowDatatype.toLowerCase().contains("bool")) {
+		    	return "Boolean";
+		    }
+		    else if(skyflowDatatype.toLowerCase().contains("float")) {
+		    	return "Float";
+		    }
+		    else {
+		    	return "Varchar";
+		    }
+		}while(iterator.hasNext());
+		}
 
 	@Override
 	public boolean isReadOnly(int column) throws SQLException {
