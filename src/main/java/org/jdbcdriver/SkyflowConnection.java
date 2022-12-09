@@ -20,14 +20,24 @@ import java.util.Properties;
 import java.util.concurrent.Executor;
 
 public class SkyflowConnection implements java.sql.Connection {
+
 	private Path directory;
 	private String vaultId;
 	private String filePath;
+  private String directory1;
 
 	SkyflowConnection(Path directory,String vaultId,String filePath) {
-		this.directory = directory;
+    this.directory = directory;
 		this.vaultId = vaultId;
 		this.filePath = filePath;
+  }
+
+	
+
+	SkyflowConnection(String directory) {
+
+		this.directory1 = directory;
+		
 	}
 
 	public String getVaultId() {
@@ -45,22 +55,25 @@ public class SkyflowConnection implements java.sql.Connection {
 
 	@Override
 	public PreparedStatement prepareStatement(String s) throws SQLException {
+		if(1==1){throw new SQLException("error1");}
 		return null;
 	}
 
 	@Override
 	public CallableStatement prepareCall(String s) throws SQLException {
+		if(1==1){throw new SQLException("error2");}
 		return null;
 	}
 
 	@Override
 	public String nativeSQL(String s) throws SQLException {
+		if(1==1){throw new SQLException("error3");}
 		return null;
 	}
 
 	@Override
 	public void setAutoCommit(boolean b) throws SQLException {
-
+		//if(1==1){throw new SQLException("error4");}
 	}
 
 	@Override
@@ -70,16 +83,19 @@ public class SkyflowConnection implements java.sql.Connection {
 
 	@Override
 	public void commit() throws SQLException {
+		if(1==1){throw new SQLException("error5");}
 
 	}
 
 	@Override
 	public void rollback() throws SQLException {
+		if(1==1){throw new SQLException("error6");}
 
 	}
 
 	@Override
 	public void close() throws SQLException {
+		if(1==1){throw new SQLException("error7");}
 
 	}
 
@@ -91,32 +107,33 @@ public class SkyflowConnection implements java.sql.Connection {
 	@Override
 	public DatabaseMetaData getMetaData() throws SQLException {
 		//throw new SQLException("MY ERROR1");
-		return null;
+		return new org.jdbcdriver.DatabaseMetaData(this);
 	}
 
 	@Override
 	public void setReadOnly(boolean b) throws SQLException {
-
+		if(1==1){throw new SQLException("error8");}
 	}
 
 	@Override
 	public boolean isReadOnly() throws SQLException {
-		return false;
+		return true;
 	}
 
 	@Override
 	public void setCatalog(String s) throws SQLException {
-
+		if(1==1){throw new SQLException("error9");}
 	}
 
 	@Override
 	public String getCatalog() throws SQLException {
-		return null;
+		//if(1==1){throw new SQLException("error11");}
+		return "skyflow";
 	}
 
 	@Override
 	public void setTransactionIsolation(int i) throws SQLException {
-
+		if(1==1){throw new SQLException("error12");}
 	}
 
 	@Override
@@ -184,11 +201,13 @@ public class SkyflowConnection implements java.sql.Connection {
 
 	@Override
 	public void rollback(Savepoint savepoint) throws SQLException {
+		if(1==1){throw new SQLException("error13");}
 
 	}
 
 	@Override
 	public void releaseSavepoint(Savepoint savepoint) throws SQLException {
+		if(1==1){throw new SQLException("error14");}
 
 	}
 
@@ -245,6 +264,7 @@ public class SkyflowConnection implements java.sql.Connection {
 
 	@Override
 	public boolean isValid(int i) throws SQLException {
+		if(1==1){throw new SQLException("error valid");}
 		return false;
 	}
 

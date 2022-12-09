@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
 import java.util.Arrays;
 import java.util.Properties;
-import java.util.Stack;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -20,13 +19,14 @@ import static org.util.Constants.CREDENTIALS_FILE_NAME;
 
 public class SkyflowDriver implements Driver {
 	private static final Driver INSTANCE = new SkyflowDriver();
-	//public static String credsPath = null;
+
 	private static boolean registered;
 	public SkyflowDriver() {}
 
 	@Override
 	public Connection connect(String s, Properties properties) throws SQLException {
 		//throw new SQLException(s);
+
 
 		  String vaultId;
 		  String credsPath;
@@ -55,6 +55,7 @@ public class SkyflowDriver implements Driver {
 		if(flag == false) throw new SQLException("Credentials file does not exists.");
 		  
 		return new SkyflowConnection(path,vaultId,credsPath);
+
 		 
 	}
 
