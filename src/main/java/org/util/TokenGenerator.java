@@ -4,14 +4,11 @@ package org.util;
 //import com.skyflow.common.utils.LogUtil;
 //import com.fasterxml.jackson.core.JsonParseException;
 //import com.fasterxml.jackson.databind.JsonMappingException;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.skyflow.common.utils.Helpers;
 import com.skyflow.common.utils.HttpUtility;
 import com.skyflow.entities.ResponseToken;
-//import com.skyflow.errors.ErrorCode;
-//import com.skyflow.errors.SkyflowException;
-//import com.skyflow.logs.ErrorLogs;
-//import com.skyflow.logs.InfoLogs;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.json.simple.JSONObject;
@@ -29,15 +26,15 @@ import java.util.Date;
 
 public class TokenGenerator {
 
-    public static ResponseToken generateBearerToken(String filepath)  {
-       // LogUtil.printInfoLog(InfoLogs.GenerateBearerTokenCalled.getLog());
+    public static ResponseToken generateBearerToken(String filepath) {
+        // LogUtil.printInfoLog(InfoLogs.GenerateBearerTokenCalled.getLog());
         JSONParser parser = new JSONParser();
         ResponseToken responseToken = null;
         Path path = null;
         try {
             if (filepath == null || filepath.isEmpty()) {
-              //  LogUtil.printErrorLog(ErrorLogs.EmptyFilePath.getLog());
-               // throw new SkyflowException(ErrorCode.EmptyFilePath);
+                //  LogUtil.printErrorLog(ErrorLogs.EmptyFilePath.getLog());
+                // throw new SkyflowException(ErrorCode.EmptyFilePath);
             }
             path = Paths.get((filepath));
             Object obj = parser.parse(new FileReader(String.valueOf(path)));
@@ -46,20 +43,20 @@ public class TokenGenerator {
             responseToken = getSATokenFromCredsFile(saCreds);
 
         } catch (FileNotFoundException e) {
-          //  LogUtil.printErrorLog(Helpers.parameterizedString(ErrorLogs.InvalidCredentialsPath.getLog(), String.valueOf(path)));
-           // throw new SkyflowException(ErrorCode.InvalidCredentialsPath.getCode(), Helpers.parameterizedString(ErrorCode.InvalidCredentialsPath.getDescription(), String.valueOf(path)), e);
+            //  LogUtil.printErrorLog(Helpers.parameterizedString(ErrorLogs.InvalidCredentialsPath.getLog(), String.valueOf(path)));
+            // throw new SkyflowException(ErrorCode.InvalidCredentialsPath.getCode(), Helpers.parameterizedString(ErrorCode.InvalidCredentialsPath.getDescription(), String.valueOf(path)), e);
         } catch (IOException e) {
-           // LogUtil.printErrorLog(Helpers.parameterizedString(ErrorLogs.InvalidCredentialsPath.getLog(), String.valueOf(path)));
-           // throw new SkyflowException(ErrorCode.InvalidCredentialsPath.getCode(), Helpers.parameterizedString(ErrorCode.InvalidCredentialsPath.getDescription(), String.valueOf(path)), e);
+            // LogUtil.printErrorLog(Helpers.parameterizedString(ErrorLogs.InvalidCredentialsPath.getLog(), String.valueOf(path)));
+            // throw new SkyflowException(ErrorCode.InvalidCredentialsPath.getCode(), Helpers.parameterizedString(ErrorCode.InvalidCredentialsPath.getDescription(), String.valueOf(path)), e);
         } catch (ParseException e) {
-           // LogUtil.printErrorLog(Helpers.parameterizedString(ErrorLogs.InvalidJsonFormat.getLog(), String.valueOf(path)));
-           // throw new SkyflowException(ErrorCode.InvalidJsonFormat.getCode(), Helpers.parameterizedString(ErrorCode.InvalidJsonFormat.getDescription(), String.valueOf(path)), e);
+            // LogUtil.printErrorLog(Helpers.parameterizedString(ErrorLogs.InvalidJsonFormat.getLog(), String.valueOf(path)));
+            // throw new SkyflowException(ErrorCode.InvalidJsonFormat.getCode(), Helpers.parameterizedString(ErrorCode.InvalidJsonFormat.getDescription(), String.valueOf(path)), e);
         }
 
         return responseToken;
     }
 
-    private static ResponseToken getSATokenFromCredsFile(JSONObject creds)  {
+    private static ResponseToken getSATokenFromCredsFile(JSONObject creds) {
         ResponseToken responseToken = null;
         try {
             String clientID = (String) creds.get("clientID");
