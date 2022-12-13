@@ -1,10 +1,5 @@
 package org.util;
 
-import com.skyflow.common.utils.LogUtil;
-import com.skyflow.common.utils.TokenUtils;
-import com.skyflow.errors.SkyflowException;
-import com.skyflow.logs.ErrorLogs;
-import com.skyflow.logs.InfoLogs;
 import org.apache.commons.codec.binary.Base64;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -21,7 +16,6 @@ public class TokenExpiry {
         long currentTime;
         try {
             if (token == null || token.isEmpty()) {
-                //LogUtil.printInfoLog(InfoLogs.EmptyBearerToken.getLog());
                 return true;
             }
 
@@ -29,17 +23,13 @@ public class TokenExpiry {
 
             String[] split = token.split("\\.");
             byte[] decodedBytes = Base64.decodeBase64(split[1]);
-            JSONObject jsn = (JSONObject)(new JSONParser()).parse(new String(decodedBytes, StandardCharsets.UTF_8));
+            JSONObject jsn = (JSONObject) (new JSONParser()).parse(new String(decodedBytes, StandardCharsets.UTF_8));
 
-            expiryTime = (long)jsn.get("exp");
-
-            //expiryTime = (long) TokenUtils.decoded(token).get("exp");
+            expiryTime = (long) jsn.get("exp");
 
         } catch (ParseException e) {
-           // LogUtil.printInfoLog(ErrorLogs.InvalidBearerToken.getLog());
             return true;
         } catch (Exception e) {
-           // LogUtil.printInfoLog(ErrorLogs.InvalidBearerToken.getLog());
             return true;
         }
         return currentTime >= expiryTime;
