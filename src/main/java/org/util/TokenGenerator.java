@@ -27,14 +27,11 @@ import java.util.Date;
 public class TokenGenerator {
 
     public static ResponseToken generateBearerToken(String filepath) {
-        // LogUtil.printInfoLog(InfoLogs.GenerateBearerTokenCalled.getLog());
         JSONParser parser = new JSONParser();
         ResponseToken responseToken = null;
         Path path = null;
         try {
             if (filepath == null || filepath.isEmpty()) {
-                //  LogUtil.printErrorLog(ErrorLogs.EmptyFilePath.getLog());
-                // throw new SkyflowException(ErrorCode.EmptyFilePath);
             }
             path = Paths.get((filepath));
             Object obj = parser.parse(new FileReader(String.valueOf(path)));

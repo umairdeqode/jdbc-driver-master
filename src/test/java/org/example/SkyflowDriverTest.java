@@ -4,7 +4,9 @@ package org.example;
 import org.jdbcdriver.SkyflowDriver;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileInputStream;
 import java.sql.*;
+import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -12,19 +14,24 @@ public class SkyflowDriverTest {
 
     @Test
     public void driver_works_in_normal_case() throws SQLException {
-        //String resourceName = "test01.csv";
-//
-//		ClassLoader classLoader = getClass().getClassLoader();
-//		String path = classLoader.getResource(resourceName).getPath();
-//
-//		String parent = Paths.get(path).getParent().toAbsolutePath().toString();
 
         Driver driver = new SkyflowDriver();
 
         try {
-            String dirPath = "/home/deq/IdeaProjects/jdbc-driver-master-nam/vault:";
+
+            Properties props = new Properties();
+            props.load(new FileInputStream("/home/deq/IdeaProjects/jdbc-driver-master-nam/src/test/resources/message.properties"));
+            String message;
+            message = props.getProperty("filePath");
+            System.out.println("Domain Url : ->"+ message);
+
+
+            String dirPath = "https://sb.area51.vault.skyflowapis.dev/:";
             String vaultId = "u4882705de68469d92b5aa1d9ada9740";
-            Connection con = driver.connect("jdbc:Skyflow:" + dirPath + vaultId, null);
+            String connectionUri = "jdbc:Skyflow:" + dirPath + vaultId;
+            System.out.println(connectionUri);
+            Connection con = driver.connect("jdbc:Skyflow:" + dirPath + vaultId, props);
+
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("select * from template;");
 

@@ -1,5 +1,7 @@
 package org.jdbcdriver;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -13,7 +15,8 @@ import java.sql.*;
 import java.util.*;
 
 public class SkyflowResultSet implements ResultSet {
-    private static final String FIELD_SEPARATOR = ";";
+
+    private static final Logger logger = LogManager.getLogger(SkyflowResultSet.class);
     private Iterator<Object> iterator;
     private List<String> record = null;
     private Map<String, String> map = new LinkedHashMap<>();
@@ -41,37 +44,16 @@ public class SkyflowResultSet implements ResultSet {
                 Set<String> set1 = obj.keySet();
                 Iterator<String> i = set1.iterator();
                 do {
-                    String k = i.next().toString();
+                    String k = i.next();
                     map.put(k, obj.get(k).toString());
-                    //System.out.println(k);
                     record.add(obj.get(k).toString());
 
                 } while (i.hasNext());
 
             }
-
-//      Old Implementation for json response with field array
-//			boolean retVal = iterator.hasNext();
-//			record= new ArrayList<>();
-
-//			if (iterator.hasNext()) {
-//				JSONObject obj = (JSONObject) iterator.next();
-//				JSONObject tempobj = (JSONObject) obj.get("fields");
-//				Set<String> s= tempobj.keySet();
-//				Iterator<String> i = s.iterator();
-//				do{
-//					String k = i.next().toString();
-//					map.put(k,tempobj.get(k).toString());
-//					//System.out.println(k);
-//					record.add(tempobj.get(k).toString());
-//				}while(i.hasNext());
-//				//System.out.println(record);
-//			}
-//			//return boolValue;
-
-            //return retVal;
             return boolValue;
         } catch (Exception e) {
+            logger.error("Error while mapping json response to hashmap " + e);
             return true;
         }
     }

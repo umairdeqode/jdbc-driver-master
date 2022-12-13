@@ -24,30 +24,42 @@ public class SkyflowDriver implements Driver {
     @Override
     public Connection connect(String s, Properties properties) throws SQLException {
 
-        String vaultId;
         String credsPath;
+        String domainUrl;
+        String vaultId;
+        String filePath;
+
+        if(properties.getProperty("filePath").isEmpty()) {
+            logger.error("FilePath is not provided.");
+            throw new SQLException("FilePath is not provided.");
+        }
+
+        filePath = properties.getProperty("filePath");
+        logger.info("FilePath : " + filePath);
+        Path path = Paths.get(filePath).toAbsolutePath();
+        logger.info("Path : " + path.toString());
+
+        if (!Files.isDirectory(path)) {
+            logger.error("Given path : '" + path + "' is not a directory");
+            throw new SQLException("'" + path + "' is not a directory");
+        }
+        credsPath = filePath;
+        logger.info("credentials file : " + path.toString() + CREDENTIALS_FILE_NAME);
 
         String[] parts = s.split(":");
 
         if (parts.length < 2 || !parts[0].toLowerCase().equals("jdbc") ||
                 !parts[1].toLowerCase().equals("skyflow")) return null;
 
-        if (parts.length < 4) {
+        if (parts.length < 5) {
             logger.error("Vault Id is not passed or incorrect");
             throw new SQLException("Vault Id is not passed or incorrect");
-        } else vaultId = parts[3];
+        } else vaultId = parts[4];
 
-        String directory = parts[2];
-        logger.info("directory : " + directory);
+        // domain url contains ':' so require parts[2] +":" + parts[3]
+        domainUrl = parts[2] +":" + parts[3];
+        logger.info("directory : " + domainUrl);
         logger.info("vaultId : " + vaultId);
-
-
-        Path path = Paths.get(directory).toAbsolutePath();
-        logger.info("Path : " + path.toString());
-
-        if (!Files.isDirectory(path)) throw new SQLException("'" + path + "' is not a directory");
-        credsPath = directory;
-        logger.info("credentials file : " + path.toString() + CREDENTIALS_FILE_NAME);
 
         boolean flag = new File(path.toString() + CREDENTIALS_FILE_NAME).isFile();
         if (flag == false) {
@@ -55,8 +67,7 @@ public class SkyflowDriver implements Driver {
             throw new SQLException("Credentials file does not exists.");
         }
 
-        return new SkyflowConnection(path, vaultId, credsPath);
-
+        return new SkyflowConnection(path, vaultId, credsPath,domainUrl);
 
     }
 

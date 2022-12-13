@@ -13,10 +13,13 @@ public class SkyflowConnection implements java.sql.Connection {
     private String filePath;
     private String directory1;
 
-    SkyflowConnection(Path directory, String vaultId, String filePath) {
+    private String domainUrl;
+
+    SkyflowConnection(Path directory, String vaultId, String filePath,String domainUrl) {
         this.directory = directory;
         this.vaultId = vaultId;
         this.filePath = filePath;
+        this.domainUrl = domainUrl;
     }
 
     SkyflowConnection(String directory) {
@@ -35,7 +38,7 @@ public class SkyflowConnection implements java.sql.Connection {
 
     @Override
     public Statement createStatement() throws SQLException {
-        return new SkyflowStatement(directory, vaultId, filePath);
+        return new SkyflowStatement(directory, vaultId, filePath,domainUrl);
     }
 
     @Override

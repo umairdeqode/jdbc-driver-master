@@ -26,7 +26,7 @@ public class HttpResponseHandler {
     public HttpResponseHandler() {
     }
 
-    public JSONArray SendPost(String s, String vaultId, String filePath) throws Exception {
+    public JSONArray SendPost(String query, String vaultId, String filePath, String domainUrl) throws Exception {
 
         String token = null;
         try {
@@ -36,30 +36,31 @@ public class HttpResponseHandler {
             throw new SQLException("There is some issue in credentials.json file, not able to generate token");
         }
         logger.info("Token  : " + token);
-        //vaultId = "u4882705de68469d92b5aa1d9ada9740";
-        String uri = VAULT_URL + VERSION + "vaults/" + vaultId + "/query";
+        String uri = domainUrl + VERSION + "vaults/" + vaultId + "/query";
+        logger.info("Domain url : " + uri);
         URL url = new URL(uri);
 
         // Post connection request
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod(POST);
 
-        String authString = "Bearer " + token;
-        conn.setRequestProperty("Authorization", authString);
-        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-        conn.setRequestProperty("Content-Type", "application/json");
+        String authString = BEARER + token;
+        conn.setRequestProperty(AUTHORIZATION, authString);
+        conn.setRequestProperty(CONTENT_TYPE, "application/x-www-form-urlencoded");
+        conn.setRequestProperty(CONTENT_TYPE, "application/json");
         conn.setDoOutput(true);
 
-        String queryString = "{ \"query\": \"" + s + "\"}";
+        String queryString = "{ \"query\": \"" + query + "\"}";
 
         try (OutputStream os = conn.getOutputStream()) {
-            byte[] input = queryString.getBytes("utf-8");
+            byte[] input = queryString.getBytes(UTF_8);
             os.write(input, 0, input.length);
         }
 
         int responseCode = conn.getResponseCode();
         logger.info("POST Response Code :: " + responseCode);
-        Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+
+        Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), UTF8));
         StringBuilder sb = new StringBuilder();
         for (int c; (c = in.read()) >= 0; ) sb.append((char) c);
 
@@ -83,15 +84,15 @@ public class HttpResponseHandler {
 
         try {
 
-            URL url = new URL("https://manage.skyflowapis.dev/v1/vaults/h54b9fa800cc4916974fdc7407463783");
-            String token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2MiOiJmNzk0ZmY4NmZiYzgxMWVhYmQ2YzNhOTExNDNlM2Q0MiIsImF1ZCI6Imh0dHBzOi8vbWFuYWdlLnNreWZsb3dhcGlzLmRldiIsImV4cCI6MTY3MTI2MjQ0MywiaWF0IjoxNjY4NjcwNDQzLCJpc3MiOiJzYS1hdXRoQG1hbmFnZS5za3lmbG93YXBpcy5kZXYiLCJqdGkiOiJyODc1ZmU0NjZhODM0MGZkYjBjNjVjMjU4MTIxOTdmMiIsInN1YiI6ImUzZWQ2YmE5OWY1NjQ1YzNiZjZmZGRhYmJiYmYzYzYyIn0.FtIfLDxcslq2fu-fMJLTGaSXlkKDd2Y6n0gUqwHbrAosYSAdSd1vEpaMaetor4rpEIpweFp6KhscEQ0sAITppG0O_sUFMpfuzW-MTmqQL3m4IxrN50ryCghrnKroDAXP6Z0ZehYF27y4fhlYwQBw3gaA-YqygzpF3nkNutB2mWdAWuIBjvu5omUqk1aVHdWFC-d2KkQt2YJLuWbbaXb162K6JBavo03yQtAzqhQdppwZnUxZ6lUndWXo5-1rav8J-AdqbXxt9774yKcC7wVBu69XqGN7vosgFW9B7vyT8cz_lZmurbgsKOq-YukBfWlBqqUy3mhpQyh4ZTmth1n4kw";
+            URL url = new URL(DATATYPE_VAULT_URL);
+            String token = DATATYPE_VAULT_URL_TOKEN;
 
             // GET connection request
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            String authString = "Bearer " + token;
-            conn.setRequestProperty("Authorization", authString);
+            String authString = BEARER + token;
+            conn.setRequestProperty(AUTHORIZATION, authString);
             conn.setRequestMethod(GET);
-            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty(ACCEPT, "application/json");
             conn.setDoOutput(true);
 
             if (conn.getResponseCode() != 200) {
@@ -103,7 +104,7 @@ public class HttpResponseHandler {
             int responseCode = conn.getResponseCode();
             logger.info("POST Response Code :: " + responseCode);
 
-            Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), UTF8));
             StringBuilder sb = new StringBuilder();
             for (int c; (c = in.read()) >= 0; )
                 sb.append((char) c);

@@ -16,7 +16,6 @@ public class TokenExpiry {
         long currentTime;
         try {
             if (token == null || token.isEmpty()) {
-                //LogUtil.printInfoLog(InfoLogs.EmptyBearerToken.getLog());
                 return true;
             }
 
@@ -28,13 +27,9 @@ public class TokenExpiry {
 
             expiryTime = (long) jsn.get("exp");
 
-            //expiryTime = (long) TokenUtils.decoded(token).get("exp");
-
         } catch (ParseException e) {
-            // LogUtil.printInfoLog(ErrorLogs.InvalidBearerToken.getLog());
             return true;
         } catch (Exception e) {
-            // LogUtil.printInfoLog(ErrorLogs.InvalidBearerToken.getLog());
             return true;
         }
         return currentTime >= expiryTime;

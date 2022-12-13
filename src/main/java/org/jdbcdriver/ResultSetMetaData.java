@@ -16,17 +16,9 @@ public class ResultSetMetaData implements java.sql.ResultSetMetaData {
     private static final Logger logger = LogManager.getLogger(ResultSetMetaData.class);
     List columnNames;
 
-    //ArrayList<String> A;
-
 
     public ResultSetMetaData() throws SQLException {
 
-        /*
-         * this.A =new ArrayList<String>();
-         *
-         * this.A.add(null); this.A.add("id1"); this.A.add("id2"); this.A.add("id3");
-         * this.A.add("name"); this.A.add("name2"); this.A.add("skyflow_id");
-         */
         throw new SQLException("no value");
 
     }

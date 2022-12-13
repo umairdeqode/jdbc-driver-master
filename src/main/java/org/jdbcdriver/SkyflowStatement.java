@@ -12,14 +12,15 @@ public class SkyflowStatement implements Statement {
     private Path directory;
     private String vaultId;
     private String filePath;
+    private String domainUrl;
     String str;
 
     //private int i;
-    SkyflowStatement(Path directory, String vaultId, String filePath) {
+    SkyflowStatement(Path directory, String vaultId, String filePath, String domainUrl) {
         this.directory = directory;
         this.vaultId = vaultId;
         this.filePath = filePath;
-        //this.i=0;
+        this.domainUrl = domainUrl;
     }
 
     private String directory1;
@@ -51,7 +52,7 @@ public class SkyflowStatement implements Statement {
         }
         HttpResponseHandler httpResponseHandler = new HttpResponseHandler();
         try {
-            JSONArray response = httpResponseHandler.SendPost(s, this.vaultId, this.filePath);
+            JSONArray response = httpResponseHandler.SendPost(s, this.vaultId, this.filePath, this.domainUrl);
             return new SkyflowResultSet(response);
         } catch (Exception e) {
             e.printStackTrace();
