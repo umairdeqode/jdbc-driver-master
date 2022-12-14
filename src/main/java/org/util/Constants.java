@@ -14,6 +14,7 @@ public class Constants {
     public static final String CONTENT_TYPE = "Content-Type";
     public static final String UTF_8 = "utf-8";
     public static final String UTF8 = "UTF-8";
+    public static final int HTTP_OK = 200;
     public static final String ACCEPT = "Accept";
     public static final String GET_REQUEST_STATUS_CODE="GET Request Response Code: ";
     public static final String POST_REQUEST_STATUS_CODE="POST Request Response Code: ";

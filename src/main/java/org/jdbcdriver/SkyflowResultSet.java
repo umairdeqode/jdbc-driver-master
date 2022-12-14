@@ -13,6 +13,7 @@ import java.sql.Date;
 import java.sql.ResultSetMetaData;
 import java.sql.*;
 import java.util.*;
+import static org.util.ErrorMessages.*;
 
 public class SkyflowResultSet implements ResultSet {
 
@@ -57,7 +58,7 @@ public class SkyflowResultSet implements ResultSet {
 			}
 			return boolValue;
 		} catch (Exception e) {
-			logger.error("Error while mapping json response to hashmap " + e);
+			logger.error(HASHMAP_ERROR + e);
 			return true;
 		}
 	}

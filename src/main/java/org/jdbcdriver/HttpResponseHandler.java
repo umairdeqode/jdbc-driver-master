@@ -96,7 +96,7 @@ public class HttpResponseHandler {
             conn.setRequestProperty(ACCEPT, "application/json");
             conn.setDoOutput(true);
 
-            if (conn.getResponseCode() != 200) {
+            if (conn.getResponseCode() != HTTP_OK) {
                 logger.error(GET_REQUEST_FAILED + conn.getResponseCode());
                 throw new RuntimeException(GET_REQUEST_FAILED
                         + conn.getResponseCode());

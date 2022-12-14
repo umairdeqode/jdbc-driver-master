@@ -6,5 +6,5 @@ public class ErrorMessages {
 	public static final String GET_REQUEST_FAILED="Get Requiest Failed : HTTP error code : ";
 	public static final String MALFORMED_URL_EXCEPTION="Malformed URL Exception : ";
 	public static final String IO_EXCEPTION="IO Exception";
-
+	public static final String HASHMAP_ERROR="Error while mapping json response to hashmap";
 }

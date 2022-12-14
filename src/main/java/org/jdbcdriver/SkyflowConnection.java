@@ -43,7 +43,6 @@ public class SkyflowConnection implements java.sql.Connection {
 
 	@Override
 	public PreparedStatement prepareStatement(String s) throws SQLException {
-		// if(1==1){throw new SQLException("error1");}
 		return null;
 	}
 
