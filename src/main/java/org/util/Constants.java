@@ -33,5 +33,6 @@ public class Constants {
     public static final String INTEGER="Integetr";
     public static final String FLOAT="Float";
     public static final String BOOLEAN="Boolean";
+    public static final String TEST_SKYFLOW="TEST.SKYFLOW";
     
   }

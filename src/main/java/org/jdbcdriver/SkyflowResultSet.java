@@ -297,18 +297,18 @@ public class SkyflowResultSet implements ResultSet {
 
 	@Override
 	public Object getObject(String s) throws SQLException {
-		throw new SQLException("getObject1" + s);
+		return null;
 	}
 
 	@Override
 	public int findColumn(String s) throws SQLException {
-		throw new SQLException("findColumn");
+		return 0;
 
 	}
 
 	@Override
 	public Reader getCharacterStream(int i) throws SQLException {
-		throw new SQLException("getCharacterStream");
+		return null;
 
 	}
 
@@ -320,13 +320,13 @@ public class SkyflowResultSet implements ResultSet {
 
 	@Override
 	public BigDecimal getBigDecimal(int i) throws SQLException {
-		throw new SQLException("getBigDecimal");
+		return null;
 
 	}
 
 	@Override
 	public BigDecimal getBigDecimal(String s) throws SQLException {
-		throw new SQLException("getBigDecimal");
+		return null;
 
 	}
 

@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
+import static org.util.Constants.*;
 
 public class ResultSetMetaData implements java.sql.ResultSetMetaData {
 	List columnNames;
@@ -110,7 +111,7 @@ public class ResultSetMetaData implements java.sql.ResultSetMetaData {
 
 	@Override
 	public String getSchemaName(int column) throws SQLException {
-		return "TEST.Skyflow";
+		return TEST_SKYFLOW;
 	}
 
 	@Override
@@ -127,12 +128,12 @@ public class ResultSetMetaData implements java.sql.ResultSetMetaData {
 
 	@Override
 	public String getTableName(int column) throws SQLException {
-		return "TEST.Skyflow";
+		return TEST_SKYFLOW;
 	}
 
 	@Override
 	public String getCatalogName(int column) throws SQLException {
-		return "TEST.Skyflow";
+		return TEST_SKYFLOW;
 	}
 
 	@Override
@@ -168,20 +169,20 @@ public class ResultSetMetaData implements java.sql.ResultSetMetaData {
 
 				if (skyflowDatatype.toLowerCase().contains("int")) {
 
-					return "Integer";
+					return INTEGER;
 				} else if (skyflowDatatype.toLowerCase().contains("bool")) {
-					return "Boolean";
+					return BOOLEAN;
 				} else if (skyflowDatatype.toLowerCase().contains("float")) {
-					return "Float";
+					return FLOAT;
 				} else {
 
-					return "Varchar";
+					return VARCHAR;
 				}
 			} while (iterator.hasNext());
 		} catch (Exception e) {
 
 			e.printStackTrace();
-			return "varchar";
+			return VARCHAR;
 		}
 	}
 
@@ -206,8 +207,7 @@ public class ResultSetMetaData implements java.sql.ResultSetMetaData {
 	@Override
 	public String getColumnClassName(int column) throws SQLException {
 
-		throw new SQLException("getColumnClassName");
-
+		return null;
 	}
 
 }

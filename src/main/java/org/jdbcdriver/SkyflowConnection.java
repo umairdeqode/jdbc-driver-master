@@ -5,6 +5,7 @@ import java.sql.*;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
+import static org.util.Constants.*;
 
 public class SkyflowConnection implements java.sql.Connection {
 
@@ -111,7 +112,7 @@ public class SkyflowConnection implements java.sql.Connection {
 	@Override
 	public String getCatalog() throws SQLException {
 
-		return "skyflow";
+		return SKYFLOW;
 	}
 
 	@Override
