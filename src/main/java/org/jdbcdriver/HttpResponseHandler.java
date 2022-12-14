@@ -18,6 +18,7 @@ import org.json.JSONObject;
 import org.util.TokenGenerationUtil;
 
 import static org.util.Constants.*;
+import static org.util.ErrorMessages.*;
 
 public class HttpResponseHandler {
 
@@ -32,8 +33,8 @@ public class HttpResponseHandler {
         try {
             token = TokenGenerationUtil.getSkyflowBearerToken(filePath);
         } catch (Exception e) {
-            logger.error("Issue in credentials.json file " + e);
-            throw new SQLException("There is some issue in credentials.json file, not able to generate token");
+            logger.error(CREDS_ISSUE + e);
+            throw new SQLException(TOKEN_GENERATION_FAILURE);
         }
         logger.info("Token  : " + token);
         String uri = domainUrl + VERSION + "vaults/" + vaultId + "/query";
@@ -58,7 +59,7 @@ public class HttpResponseHandler {
         }
 
         int responseCode = conn.getResponseCode();
-        logger.info("POST Response Code :: " + responseCode);
+        logger.info(POST_REQUEST_STATUS_CODE + responseCode);
 
         Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), UTF8));
         StringBuilder sb = new StringBuilder();
@@ -96,13 +97,13 @@ public class HttpResponseHandler {
             conn.setDoOutput(true);
 
             if (conn.getResponseCode() != 200) {
-                logger.error("Failed : HTTP error code : " + conn.getResponseCode());
-                throw new RuntimeException("Failed : HTTP error code : "
+                logger.error(GET_REQUEST_FAILED + conn.getResponseCode());
+                throw new RuntimeException(GET_REQUEST_FAILED
                         + conn.getResponseCode());
             }
 
             int responseCode = conn.getResponseCode();
-            logger.info("POST Response Code :: " + responseCode);
+            logger.info(GET_REQUEST_STATUS_CODE + responseCode);
 
             Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), UTF8));
             StringBuilder sb = new StringBuilder();
@@ -120,11 +121,11 @@ public class HttpResponseHandler {
             return result;
 
         } catch (MalformedURLException e) {
-            logger.error("MalformedURLException : " + e);
+            logger.error(MALFORMED_URL_EXCEPTION + e);
             e.printStackTrace();
 
         } catch (IOException e) {
-            logger.error("IOException : " + e);
+            logger.error(IO_EXCEPTION  + e);
             e.printStackTrace();
         }
 

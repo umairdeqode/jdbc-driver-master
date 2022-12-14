@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.RowIdLifetime;
 import java.sql.SQLException;
-import static org.util.Constants.*;
+import static org.util.MetaDataConstants.*;
 
 public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 
