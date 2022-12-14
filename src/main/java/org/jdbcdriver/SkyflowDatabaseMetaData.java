@@ -391,7 +391,7 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 	@Override
 	public String getSchemaTerm() throws SQLException {
 
-		return "schema";
+		return SCHEMA;
 	}
 
 	@Override
@@ -404,7 +404,7 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 	@Override
 	public String getCatalogTerm() throws SQLException {
 
-		return "database";
+		return DATABASE;
 	}
 
 	@Override
@@ -800,72 +800,72 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 	public ResultSet getColumns(String catalog, String schemaPattern, String tableNamePattern, String columnNamePattern)
 			throws SQLException {
 
-		throw new SQLException("getColumns");
+		return null;
 	}
 
 	@Override
 	public ResultSet getColumnPrivileges(String catalog, String schema, String table, String columnNamePattern)
 			throws SQLException {
 
-		throw new SQLException("getColumnPrivileges");
+		return null;
 	}
 
 	@Override
 	public ResultSet getTablePrivileges(String catalog, String schemaPattern, String tableNamePattern)
 			throws SQLException {
 
-		throw new SQLException("getTablePrivileges");
+		return null;
 	}
 
 	@Override
 	public ResultSet getBestRowIdentifier(String catalog, String schema, String table, int scope, boolean nullable)
 			throws SQLException {
 
-		throw new SQLException("getBestRowIdentifier");
+		return null;
 	}
 
 	@Override
 	public ResultSet getVersionColumns(String catalog, String schema, String table) throws SQLException {
 
-		throw new SQLException("getVersionColumns");
+		return null;
 	}
 
 	@Override
 	public ResultSet getPrimaryKeys(String catalog, String schema, String table) throws SQLException {
 
-		throw new SQLException("getPrimaryKeys");
+		return null;
 	}
 
 	@Override
 	public ResultSet getImportedKeys(String catalog, String schema, String table) throws SQLException {
 
-		throw new SQLException("getImportedKeys");
+		return null;
 	}
 
 	@Override
 	public ResultSet getExportedKeys(String catalog, String schema, String table) throws SQLException {
 
-		throw new SQLException("getExportedKeys");
+		return null;
 	}
 
 	@Override
 	public ResultSet getCrossReference(String parentCatalog, String parentSchema, String parentTable,
 			String foreignCatalog, String foreignSchema, String foreignTable) throws SQLException {
 
-		throw new SQLException("getCrossReference");
+		return null;
 	}
 
 	@Override
 	public ResultSet getTypeInfo() throws SQLException {
 
-		throw new SQLException("getTypeInfo");
+		return null;
 	}
 
 	@Override
 	public ResultSet getIndexInfo(String catalog, String schema, String table, boolean unique, boolean approximate)
 			throws SQLException {
 
-		throw new SQLException("getIndexInfo");
+		return null;
 	}
 
 	@Override
@@ -944,7 +944,7 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 	public ResultSet getUDTs(String catalog, String schemaPattern, String typeNamePattern, int[] types)
 			throws SQLException {
 
-		throw new SQLException("getUDTs");
+		return null;
 	}
 
 	@Override
@@ -979,20 +979,20 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 	@Override
 	public ResultSet getSuperTypes(String catalog, String schemaPattern, String typeNamePattern) throws SQLException {
 
-		throw new SQLException("getSuperTypes");
+		return null;
 	}
 
 	@Override
 	public ResultSet getSuperTables(String catalog, String schemaPattern, String tableNamePattern) throws SQLException {
 
-		throw new SQLException("getSuperTypes");
+		return null;
 	}
 
 	@Override
 	public ResultSet getAttributes(String catalog, String schemaPattern, String typeNamePattern,
 			String attributeNamePattern) throws SQLException {
 
-		throw new SQLException("getAttributes");
+		return null;
 	}
 
 	@Override
@@ -1058,7 +1058,7 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 	@Override
 	public ResultSet getSchemas(String catalog, String schemaPattern) throws SQLException {
 
-		throw new SQLException("getSchemas");
+		return null;
 	}
 
 	@Override
@@ -1076,28 +1076,28 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 	@Override
 	public ResultSet getClientInfoProperties() throws SQLException {
 
-		throw new SQLException("getClientInfoProperties");
+		return null;
 	}
 
 	@Override
 	public ResultSet getFunctions(String catalog, String schemaPattern, String functionNamePattern)
 			throws SQLException {
 
-		throw new SQLException("getFunctions");
+		return null;
 	}
 
 	@Override
 	public ResultSet getFunctionColumns(String catalog, String schemaPattern, String functionNamePattern,
 			String columnNamePattern) throws SQLException {
 
-		throw new SQLException("getFunctionColumns");
+		return null;
 	}
 
 	@Override
 	public ResultSet getPseudoColumns(String catalog, String schemaPattern, String tableNamePattern,
 			String columnNamePattern) throws SQLException {
 
-		throw new SQLException("getPseudoColumns");
+		return null;
 	}
 
 	@Override
