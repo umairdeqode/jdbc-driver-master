@@ -85,80 +85,80 @@ public class SkyflowResultSet implements ResultSet {
 
 	@Override
 	public byte getByte(int i) throws SQLException {
-		throw new SQLException("getByte");
+		return 0;
 	}
 
 	@Override
 	public short getShort(int i) throws SQLException {
-		throw new SQLException("getByte");
+		return 0;
 	}
 
 	@Override
 	public int getInt(int i) throws SQLException {
-		throw new SQLException("getByte");
+		return 0;
 	}
 
 	@Override
 	public long getLong(int i) throws SQLException {
-		throw new SQLException("getByte");
+		return 0;
 	}
 
 	@Override
 	public float getFloat(int i) throws SQLException {
-		throw new SQLException("getByte");
+		return 0;
 	}
 
 	@Override
 	public double getDouble(int i) throws SQLException {
-		throw new SQLException("getByte");
+		return 0;
 
 	}
 
 	@Override
 	public BigDecimal getBigDecimal(int i, int i1) throws SQLException {
-		throw new SQLException("getByte");
+		return null;
 
 	}
 
 	@Override
 	public byte[] getBytes(int i) throws SQLException {
-		throw new SQLException("getByte");
+		return null;
 
 	}
 
 	@Override
 	public Date getDate(int i) throws SQLException {
-		throw new SQLException("getByte");
+		return null;
 
 	}
 
 	@Override
 	public Time getTime(int i) throws SQLException {
-		throw new SQLException("getByte");
+		return null;
 
 	}
 
 	@Override
 	public Timestamp getTimestamp(int i) throws SQLException {
-		throw new SQLException("getByte");
+		return null;
 
 	}
 
 	@Override
 	public InputStream getAsciiStream(int i) throws SQLException {
-		throw new SQLException("getByte");
+		return null;
 
 	}
 
 	@Override
 	public InputStream getUnicodeStream(int i) throws SQLException {
-		throw new SQLException("getByte");
+		return null;
 
 	}
 
 	@Override
 	public InputStream getBinaryStream(int i) throws SQLException {
-		throw new SQLException("getByte");
+		return null;
 
 	}
 
@@ -174,85 +174,85 @@ public class SkyflowResultSet implements ResultSet {
 
 	@Override
 	public byte getByte(String s) throws SQLException {
-		throw new SQLException("getByte");
+		return 0;
 
 	}
 
 	@Override
 	public short getShort(String s) throws SQLException {
-		throw new SQLException("getByte");
+		return 0;
 
 	}
 
 	@Override
 	public int getInt(String s) throws SQLException {
-		throw new SQLException("getByte");
+		return 0;
 
 	}
 
 	@Override
 	public long getLong(String s) throws SQLException {
-		throw new SQLException("getByte");
+		return 0;
 
 	}
 
 	@Override
 	public float getFloat(String s) throws SQLException {
-		throw new SQLException("getByte");
+		return 0;
 
 	}
 
 	@Override
 	public double getDouble(String s) throws SQLException {
-		throw new SQLException("getByte");
+		return 0;
 
 	}
 
 	@Override
 	public BigDecimal getBigDecimal(String s, int i) throws SQLException {
-		throw new SQLException("getByte");
+		return null;
 
 	}
 
 	@Override
 	public byte[] getBytes(String s) throws SQLException {
-		throw new SQLException("getByte");
+		return null;
 
 	}
 
 	@Override
 	public Date getDate(String s) throws SQLException {
-		throw new SQLException("getByte");
+		return null;
 
 	}
 
 	@Override
 	public Time getTime(String s) throws SQLException {
-		throw new SQLException("getByte");
+		return null;
 
 	}
 
 	@Override
 	public Timestamp getTimestamp(String s) throws SQLException {
-		throw new SQLException("getByte");
+		return null;
 
 	}
 
 	@Override
 	public InputStream getAsciiStream(String s) throws SQLException {
-		throw new SQLException("getByte");
+		return null;
 
 	}
 
 	@Override
 	public InputStream getUnicodeStream(String s) throws SQLException {
-		throw new SQLException("getByte");
+		return null;
 
 	}
 
 	@Override
 	public InputStream getBinaryStream(String s) throws SQLException {
-		throw new SQLException("getByte");
+		return null;
 
 	}
 
