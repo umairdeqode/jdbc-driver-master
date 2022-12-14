@@ -20,14 +20,17 @@ public class SkyflowResultSet implements ResultSet {
     private Iterator<Object> iterator;
     private List<String> record = null;
     private Map<String, String> map = new LinkedHashMap<>();
+	private Integer counter;
 
     public SkyflowResultSet() {
         record = new ArrayList<>();
         iterator = Collections.emptyIterator();
+        this.counter=0;
     }
 
     public SkyflowResultSet(JSONArray response) {
         iterator = response.iterator();
+        this.counter=0;
     }
 
     @Override
@@ -39,7 +42,8 @@ public class SkyflowResultSet implements ResultSet {
             record = new ArrayList<>();
 
             if (iterator.hasNext()) {
-
+				final Integer counter=this.counter;
+				++this.counter;
                 JSONObject obj = (JSONObject) iterator.next();
                 Set<String> set1 = obj.keySet();
                 Iterator<String> i = set1.iterator();
@@ -379,8 +383,8 @@ public class SkyflowResultSet implements ResultSet {
 
     @Override
     public int getRow() throws SQLException {
-        throw new SQLException("getRow");
-        //return 0;
+        //throw new SQLException("getRow");
+        return this.counter;
     }
 
     @Override

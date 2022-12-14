@@ -1,12 +1,12 @@
 package org.jdbcdriver;
 
-import java.util.HashMap;
+import java.util.*;
 
 public class DataTypesDynamicMapper {
 	
-	HashMap<String, Integer> DataTypeCodes;
+	HashMap<String, Integer> DataTypeCodes=new HashMap<String, Integer>();
 	public HashMap getDataTypeCodes() {
-		DataTypeCodes=new HashMap<String, Integer>();
+	
 		DataTypeCodes.put("Varchar", 12);
 		DataTypeCodes.put("Integer", 4);
 		DataTypeCodes.put("Float", 6);
