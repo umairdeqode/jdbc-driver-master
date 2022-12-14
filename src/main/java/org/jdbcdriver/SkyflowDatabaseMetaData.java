@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.RowIdLifetime;
 import java.sql.SQLException;
 import static org.util.MetaDataConstants.*;
+import static org.util.Constants.*;
 
 public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 	public SkyflowConnection conn;
@@ -49,7 +50,7 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 	@Override
 	public String getUserName() throws SQLException {
 
-		return "Skyflow";
+		return SKYFLOW;
 	}
 
 	@Override
@@ -85,25 +86,25 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 	@Override
 	public String getDatabaseProductName() throws SQLException {
 
-		return "Skyflow";
+		return SKYFLOW;
 	}
 
 	@Override
 	public String getDatabaseProductVersion() throws SQLException {
 
-		return "1.0";
+		return BASE_VERSION;
 	}
 
 	@Override
 	public String getDriverName() throws SQLException {
 
-		return "SkyflowDriver";
+		return SKYFLOW_DRIVER;
 	}
 
 	@Override
 	public String getDriverVersion() throws SQLException {
 
-		return "1.0";
+		return BASE_VERSION;
 	}
 
 	@Override
@@ -217,13 +218,13 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 	@Override
 	public String getSearchStringEscape() throws SQLException {
 
-		return "\\";
+		return null;
 	}
 
 	@Override
 	public String getExtraNameCharacters() throws SQLException {
 
-		return "#@";
+		return null;
 	}
 
 	@Override
@@ -397,8 +398,7 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 	@Override
 	public String getProcedureTerm() throws SQLException {
 
-		throw new SQLException("getProcedureTerm");
-		// return null;
+		return null;
 	}
 
 	@Override

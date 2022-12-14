@@ -1,6 +1,7 @@
 package org.jdbcdriver;
 
 import java.util.*;
+import static org.util.Constants.*;
 
 public class DataTypesDynamicMapper {
 
@@ -8,12 +9,10 @@ public class DataTypesDynamicMapper {
 
 	public HashMap getDataTypeCodes() {
 
-		DataTypeCodes.put("Varchar", 12);
-		DataTypeCodes.put("Integer", 4);
-		DataTypeCodes.put("Float", 6);
-		DataTypeCodes.put("Boolean", 16);
-		DataTypeCodes.put("Date", 91);
-		DataTypeCodes.put("Time", 92);
+		DataTypeCodes.put(VARCHAR, 12);
+		DataTypeCodes.put(INTEGER, 4);
+		DataTypeCodes.put(FLOAT, 6);
+		DataTypeCodes.put(BOOLEAN, 16);
 		return DataTypeCodes;
 	}
 

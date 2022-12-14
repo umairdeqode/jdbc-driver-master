@@ -24,8 +24,14 @@ public class Constants {
     public static final String PATH="Path : ";
     public static final String VAULT_ID="vaultId : ";
     public static final String SKYFLOW="skyflow";
+    public static final String SKYFLOW_DRIVER="SkyflowDriver";
     public static final String JDBC="jdbc";
     public static final String CREDS_FILE="credentials file : ";
     public static final String FROM="from";
+    public static final String BASE_VERSION="1.0";
+    public static final String VARCHAR="Varchar";
+    public static final String INTEGER="Integetr";
+    public static final String FLOAT="Float";
+    public static final String BOOLEAN="Boolean";
     
-}
+  }
