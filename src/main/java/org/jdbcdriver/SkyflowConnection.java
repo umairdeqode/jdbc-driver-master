@@ -136,17 +136,17 @@ public class SkyflowConnection implements java.sql.Connection {
 
 	@Override
 	public Statement createStatement(int i, int i1) throws SQLException {
-		throw new SQLException("createStatement");
+		return null;
 	}
 
 	@Override
 	public PreparedStatement prepareStatement(String s, int i, int i1) throws SQLException {
-		throw new SQLException("PreparedStatement");
+		return null;
 	}
 
 	@Override
 	public CallableStatement prepareCall(String s, int i, int i1) throws SQLException {
-		throw new SQLException("CallableStatement");
+		return null;
 	}
 
 	@Override
@@ -191,7 +191,7 @@ public class SkyflowConnection implements java.sql.Connection {
 
 	@Override
 	public Statement createStatement(int i, int i1, int i2) throws SQLException {
-		throw new SQLException("createStatement");
+		return null;
 	}
 
 	@Override
