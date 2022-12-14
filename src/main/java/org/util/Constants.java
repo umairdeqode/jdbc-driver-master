@@ -18,4 +18,12 @@ public class Constants {
     public static final String ACCEPT = "Accept";
     public static final String GET_REQUEST_STATUS_CODE="GET Request Response Code: ";
     public static final String POST_REQUEST_STATUS_CODE="POST Request Response Code: ";
+    public static final String DIRECTORY="directory : ";
+    public static final String FILE_PATH="File Path : ";
+    public static final String FILEPATH="filePath";
+    public static final String PATH="Path : ";
+    public static final String VAULT_ID="vaultId : ";
+    public static final String SKYFLOW="skyflow";
+    public static final String JDBC="jdbc";
+    public static final String CREDS_FILE="credentials file : ";
 }

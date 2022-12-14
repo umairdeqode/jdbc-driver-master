@@ -10,7 +10,8 @@ import java.nio.file.Paths;
 import java.sql.*;
 import java.util.Properties;
 
-import static org.util.Constants.CREDENTIALS_FILE_NAME;
+import static org.util.Constants.*;
+import static org.util.ErrorMessages.*;
 
 public class SkyflowDriver implements Driver {
     private static final Logger logger = LogManager.getLogger(SkyflowDriver.class);
@@ -29,42 +30,42 @@ public class SkyflowDriver implements Driver {
         String vaultId;
         String filePath;
 
-        if(properties.getProperty("filePath").isEmpty()) {
-            logger.error("FilePath is not provided.");
-            throw new SQLException("FilePath is not provided.");
+        if(properties.getProperty(FILEPATH).isEmpty()) {
+            logger.error(FILE_PATH_MISSING);
+            throw new SQLException(FILE_PATH_MISSING);
         }
 
-        filePath = properties.getProperty("filePath");
-        logger.info("FilePath : " + filePath);
+        filePath = properties.getProperty(FILEPATH);
+        logger.info(FILE_PATH + filePath);
         Path path = Paths.get(filePath).toAbsolutePath();
-        logger.info("Path : " + path.toString());
+        logger.info(PATH + path.toString());
 
         if (!Files.isDirectory(path)) {
-            logger.error("Given path : '" + path + "' is not a directory");
-            throw new SQLException("'" + path + "' is not a directory");
+            logger.error(FILE_PATH_ERROR + path);
+            throw new SQLException(FILE_PATH_ERROR + path);
         }
         credsPath = filePath;
-        logger.info("credentials file : " + path.toString() + CREDENTIALS_FILE_NAME);
+        logger.info(CREDS_FILE + path.toString() + CREDENTIALS_FILE_NAME);
 
         String[] parts = s.split(":");
 
-        if (parts.length < 2 || !parts[0].toLowerCase().equals("jdbc") ||
-                !parts[1].toLowerCase().equals("skyflow")) return null;
+        if (parts.length < 2 || !parts[0].toLowerCase().equals(JDBC) ||
+                !parts[1].toLowerCase().equals(SKYFLOW)) return null;
 
         if (parts.length < 5) {
-            logger.error("Vault Id is not passed or incorrect");
-            throw new SQLException("Vault Id is not passed or incorrect");
+            logger.error(ISSUE_WITH_VAULT_ID);
+            throw new SQLException(ISSUE_WITH_VAULT_ID);
         } else vaultId = parts[4];
 
         // domain url contains ':' so require parts[2] +":" + parts[3]
         domainUrl = parts[2] +":" + parts[3];
-        logger.info("directory : " + domainUrl);
-        logger.info("vaultId : " + vaultId);
+        logger.info(DIRECTORY + domainUrl);
+        logger.info(VAULT_ID + vaultId);
 
         boolean flag = new File(path.toString() + CREDENTIALS_FILE_NAME).isFile();
         if (flag == false) {
-            logger.error("Credentials file does not exists.");
-            throw new SQLException("Credentials file does not exists.");
+            logger.error(CREDS_FILE_MISSING);
+            throw new SQLException(CREDS_FILE_MISSING);
         }
 
         return new SkyflowConnection(path, vaultId, credsPath,domainUrl);
