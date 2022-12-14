@@ -4,6 +4,7 @@ import org.json.JSONArray;
 
 import java.nio.file.Path;
 import java.sql.*;
+import static org.util.Constants.*;
 
 public class SkyflowStatement implements Statement {
 
@@ -138,7 +139,7 @@ public class SkyflowStatement implements Statement {
 	public boolean execute(String s) throws SQLException {
 		this.str = s;
 
-		if (!s.contains("from")) {
+		if (!s.contains(FROM)) {
 			this.str = "select * from template;";
 		}
 		return true;
@@ -236,17 +237,17 @@ public class SkyflowStatement implements Statement {
 
 	@Override
 	public boolean execute(String s, int i) throws SQLException {
-		throw new SQLException("error2");
+		return true;
 	}
 
 	@Override
 	public boolean execute(String s, int[] ints) throws SQLException {
-		throw new SQLException("error3");
+		return true;
 	}
 
 	@Override
 	public boolean execute(String s, String[] strings) throws SQLException {
-		throw new SQLException("error4");
+		return true;
 	}
 
 	@Override

@@ -26,4 +26,5 @@ public class Constants {
     public static final String SKYFLOW="skyflow";
     public static final String JDBC="jdbc";
     public static final String CREDS_FILE="credentials file : ";
+    public static final String FROM="from";
 }
