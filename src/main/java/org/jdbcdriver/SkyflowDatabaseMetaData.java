@@ -3,12 +3,13 @@ package org.jdbcdriver;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import static org.constants.HTTPConstants.*;
+import static org.constants.MetaDataConstants.*;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.RowIdLifetime;
 import java.sql.SQLException;
-import static org.util.MetaDataConstants.*;
-import static org.util.Constants.*;
 
 public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 	public SkyflowConnection conn;

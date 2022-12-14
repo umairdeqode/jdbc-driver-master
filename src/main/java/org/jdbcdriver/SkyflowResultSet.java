@@ -5,6 +5,8 @@ import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import static org.constants.ErrorMessages.*;
+
 import java.io.InputStream;
 import java.io.Reader;
 import java.math.BigDecimal;
@@ -13,7 +15,6 @@ import java.sql.Date;
 import java.sql.ResultSetMetaData;
 import java.sql.*;
 import java.util.*;
-import static org.util.ErrorMessages.*;
 
 public class SkyflowResultSet implements ResultSet {
 

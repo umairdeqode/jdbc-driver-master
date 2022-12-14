@@ -1,11 +1,12 @@
 package org.jdbcdriver;
 
+import static org.constants.HTTPConstants.*;
+
 import java.nio.file.Path;
 import java.sql.*;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
-import static org.util.Constants.*;
 
 public class SkyflowConnection implements java.sql.Connection {
 

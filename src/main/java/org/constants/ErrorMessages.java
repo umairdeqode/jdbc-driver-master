@@ -1,4 +1,4 @@
-package org.util;
+package org.constants;
 
 public class ErrorMessages {
 	public static final String CREDS_ISSUE="Issue in credentials.json file ";

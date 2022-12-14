@@ -1,5 +1,8 @@
 package org.jdbcdriver;
 
+import static org.constants.ErrorMessages.*;
+import static org.constants.HTTPConstants.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,12 +16,9 @@ import java.util.*;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.util.TokenGeneration;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.util.TokenGenerationUtil;
-
-import static org.util.Constants.*;
-import static org.util.ErrorMessages.*;
 
 public class HttpResponseHandler {
 
@@ -31,7 +31,7 @@ public class HttpResponseHandler {
 
         String token = null;
         try {
-            token = TokenGenerationUtil.getSkyflowBearerToken(filePath);
+            token = TokenGeneration.getSkyflowBearerToken(filePath);
         } catch (Exception e) {
             logger.error(CREDS_ISSUE + e);
             throw new SQLException(TOKEN_GENERATION_FAILURE);

@@ -3,15 +3,16 @@ package org.util;
 import com.skyflow.entities.ResponseToken;
 import com.skyflow.errors.SkyflowException;
 import com.skyflow.serviceaccount.util.Token;
+
+import static org.constants.HTTPConstants.CREDENTIALS_FILE_NAME;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.jdbcdriver.HttpResponseHandler;
 
-import static org.util.Constants.CREDENTIALS_FILE_NAME;
-
-public class TokenGenerationUtil {
-
-    private static final Logger logger = LogManager.getLogger(TokenGenerationUtil.class);
+public class TokenGeneration {
+	
+	private static final Logger logger = LogManager.getLogger(TokenGeneration.class);
     private static String bearerToken = null;
 
     public static String getSkyflowBearerToken(String filePath) {
@@ -30,4 +31,5 @@ public class TokenGenerationUtil {
 
         return bearerToken;
     }
+
 }

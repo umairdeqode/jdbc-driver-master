@@ -3,15 +3,15 @@ package org.jdbcdriver;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import static org.constants.ErrorMessages.*;
+import static org.constants.HTTPConstants.*;
+
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
 import java.util.Properties;
-
-import static org.util.Constants.*;
-import static org.util.ErrorMessages.*;
 
 public class SkyflowDriver implements Driver {
     private static final Logger logger = LogManager.getLogger(SkyflowDriver.class);

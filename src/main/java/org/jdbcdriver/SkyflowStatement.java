@@ -2,9 +2,10 @@ package org.jdbcdriver;
 
 import org.json.JSONArray;
 
+import static org.constants.HTTPConstants.*;
+
 import java.nio.file.Path;
 import java.sql.*;
-import static org.util.Constants.*;
 
 public class SkyflowStatement implements Statement {
 

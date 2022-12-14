@@ -1,6 +1,6 @@
-package org.util;
+package org.constants;
 
-public class Constants {
+public class HTTPConstants {
 
     public static final String VERSION = "v1/";
     public static final String VAULT_URL = "https://sb.area51.vault.skyflowapis.dev/";

@@ -1,4 +1,4 @@
-package org.util;
+package org.constants;
 
 public class MetaDataConstants {
 	

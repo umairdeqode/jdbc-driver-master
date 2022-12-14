@@ -1,7 +1,8 @@
 package org.jdbcdriver;
 
+import static org.constants.HTTPConstants.*;
+
 import java.util.*;
-import static org.util.Constants.*;
 
 public class DataTypesDynamicMapper {
 

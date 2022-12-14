@@ -5,10 +5,11 @@ import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import static org.constants.HTTPConstants.*;
+
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
-import static org.util.Constants.*;
 
 public class ResultSetMetaData implements java.sql.ResultSetMetaData {
 	List columnNames;
