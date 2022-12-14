@@ -5,8 +5,6 @@ import org.json.JSONArray;
 import java.nio.file.Path;
 import java.sql.*;
 
-//import com.google.gson.JsonArray;
-
 public class SkyflowStatement implements Statement {
 
 	private Path directory;
@@ -15,7 +13,6 @@ public class SkyflowStatement implements Statement {
 	private String domainUrl;
 	String str;
 
-	// private int i;
 	SkyflowStatement(Path directory, String vaultId, String filePath, String domainUrl) {
 		this.directory = directory;
 		this.vaultId = vaultId;
@@ -34,7 +31,6 @@ public class SkyflowStatement implements Statement {
 
 	public SkyflowStatement() {
 		this.str = "select * from template;";
-		// TODO Auto-generated constructor stub
 	}
 
 	public String sendString() {

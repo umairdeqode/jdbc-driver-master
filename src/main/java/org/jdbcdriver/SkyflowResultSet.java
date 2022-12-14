@@ -164,7 +164,6 @@ public class SkyflowResultSet implements ResultSet {
 	@Override
 	public String getString(String s) throws SQLException {
 		return this.map.get(s);
-		// return this.record.get(0);
 	}
 
 	@Override
@@ -273,7 +272,6 @@ public class SkyflowResultSet implements ResultSet {
 
 	@Override
 	public ResultSetMetaData getMetaData() throws SQLException {
-		// To be overridden
 		boolean retVal = iterator.hasNext();
 		record = new ArrayList<>();
 		Set<String> s = new LinkedHashSet<String>();
@@ -299,7 +297,6 @@ public class SkyflowResultSet implements ResultSet {
 	@Override
 	public Object getObject(String s) throws SQLException {
 		throw new SQLException("getObject1" + s);
-		// return null;
 	}
 
 	@Override

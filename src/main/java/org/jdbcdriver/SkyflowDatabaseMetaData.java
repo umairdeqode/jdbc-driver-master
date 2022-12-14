@@ -10,8 +10,6 @@ import java.sql.SQLException;
 import static org.util.MetaDataConstants.*;
 
 public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
-
-	public static int maxBufferSize = 65535;
 	public SkyflowConnection conn;
 
 	public SkyflowDatabaseMetaData(SkyflowConnection skyflowConnection) {
@@ -676,31 +674,31 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 	@Override
 	public int getMaxStatementLength() throws SQLException {
 
-		return maxBufferSize - 4; // Max buffer - header
+		return MAX_BUFFER_SIZE - 4; // Max buffer - header
 	}
 
 	@Override
 	public int getMaxStatements() throws SQLException {
 
-		return 1;
+		return MAX_STATEMENTS;
 	}
 
 	@Override
 	public int getMaxTableNameLength() throws SQLException {
 
-		return 64;
+		return MAX_TABLE_NAME_LENGTH;
 	}
 
 	@Override
 	public int getMaxTablesInSelect() throws SQLException {
 
-		return 256;
+		return MAX_TABLES_IN_SELECT;
 	}
 
 	@Override
 	public int getMaxUserNameLength() throws SQLException {
 
-		return 16;
+		return MAX_USER_NAME_LENGTH;
 	}
 
 	@Override
@@ -776,8 +774,6 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 	@Override
 	public ResultSet getSchemas() throws SQLException {
 
-		// throw new SQLException("getTables");
-		// throw new SQLException("getCatalogs");
 		JSONArray al = new JSONArray();
 		JSONObject json = new JSONObject();
 		json.put("TABLE_SCHEM", "schema");
@@ -794,7 +790,6 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 		json.put("TABLE_TYPE", "cdatabase");
 		al.put(json);
 		return new SkyflowResultSet(al);
-		// return new SkyflowResultSet();
 	}
 
 	@Override
@@ -805,7 +800,6 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 		json.put("TABLE_TYPE", "TABLE");
 		al.put(json);
 		return new SkyflowResultSet(al);
-		// return new SkyflowResultSet();
 	}
 
 	@Override
@@ -813,7 +807,6 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 			throws SQLException {
 
 		throw new SQLException("getColumns");
-		// return new SkyflowResultSet();
 	}
 
 	@Override
@@ -821,7 +814,6 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 			throws SQLException {
 
 		throw new SQLException("getColumnPrivileges");
-		// return null;
 	}
 
 	@Override
@@ -829,7 +821,6 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 			throws SQLException {
 
 		throw new SQLException("getTablePrivileges");
-		// return null;
 	}
 
 	@Override
@@ -837,35 +828,30 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 			throws SQLException {
 
 		throw new SQLException("getBestRowIdentifier");
-		// return null;
 	}
 
 	@Override
 	public ResultSet getVersionColumns(String catalog, String schema, String table) throws SQLException {
 
 		throw new SQLException("getVersionColumns");
-		// return null;
 	}
 
 	@Override
 	public ResultSet getPrimaryKeys(String catalog, String schema, String table) throws SQLException {
 
 		throw new SQLException("getPrimaryKeys");
-		// return null;
 	}
 
 	@Override
 	public ResultSet getImportedKeys(String catalog, String schema, String table) throws SQLException {
 
 		throw new SQLException("getImportedKeys");
-		// return null;
 	}
 
 	@Override
 	public ResultSet getExportedKeys(String catalog, String schema, String table) throws SQLException {
 
 		throw new SQLException("getExportedKeys");
-		// return null;
 	}
 
 	@Override
@@ -873,14 +859,12 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 			String foreignCatalog, String foreignSchema, String foreignTable) throws SQLException {
 
 		throw new SQLException("getCrossReference");
-		// return null;
 	}
 
 	@Override
 	public ResultSet getTypeInfo() throws SQLException {
 
 		throw new SQLException("getTypeInfo");
-		// return null;
 	}
 
 	@Override
@@ -888,7 +872,6 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 			throws SQLException {
 
 		throw new SQLException("getIndexInfo");
-		// return null;
 	}
 
 	@Override
@@ -968,15 +951,11 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 			throws SQLException {
 
 		throw new SQLException("getUDTs");
-		// return null;
 	}
 
 	@Override
 	public Connection getConnection() throws SQLException {
-
-		// throw new SQLException("getConnection");
 		return this.conn;
-		// to change
 	}
 
 	@Override
@@ -1007,14 +986,12 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 	public ResultSet getSuperTypes(String catalog, String schemaPattern, String typeNamePattern) throws SQLException {
 
 		throw new SQLException("getSuperTypes");
-		// return null;
 	}
 
 	@Override
 	public ResultSet getSuperTables(String catalog, String schemaPattern, String tableNamePattern) throws SQLException {
 
 		throw new SQLException("getSuperTypes");
-		// return null;
 	}
 
 	@Override
@@ -1022,7 +999,6 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 			String attributeNamePattern) throws SQLException {
 
 		throw new SQLException("getAttributes");
-		// return null;
 	}
 
 	@Override
@@ -1089,7 +1065,6 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 	public ResultSet getSchemas(String catalog, String schemaPattern) throws SQLException {
 
 		throw new SQLException("getSchemas");
-		// return null;
 	}
 
 	@Override
@@ -1108,7 +1083,6 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 	public ResultSet getClientInfoProperties() throws SQLException {
 
 		throw new SQLException("getClientInfoProperties");
-		// return null;
 	}
 
 	@Override
@@ -1116,7 +1090,6 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 			throws SQLException {
 
 		throw new SQLException("getFunctions");
-		// return null;
 	}
 
 	@Override
@@ -1124,7 +1097,6 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 			String columnNamePattern) throws SQLException {
 
 		throw new SQLException("getFunctionColumns");
-		// return null;
 	}
 
 	@Override
@@ -1132,7 +1104,6 @@ public class SkyflowDatabaseMetaData implements java.sql.DatabaseMetaData {
 			String columnNamePattern) throws SQLException {
 
 		throw new SQLException("getPseudoColumns");
-		// return null;
 	}
 
 	@Override

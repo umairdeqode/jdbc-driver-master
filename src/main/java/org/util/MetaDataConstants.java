@@ -16,5 +16,9 @@ public class MetaDataConstants {
     public static final int MAX_SCHEMA_NAME_LENGTH=5;
     public static final int MAX_PROCEDURE_NAME_LENGTH=0;
     public static final int MAX_CATALOG_NAME_LENGTH=32;
-
+    public static final int MAX_BUFFER_SIZE=65535;
+    public static final int MAX_STATEMENTS=1;
+    public static final int MAX_TABLE_NAME_LENGTH=64;
+    public static final int MAX_TABLES_IN_SELECT=64;
+    public static final int MAX_USER_NAME_LENGTH=64;
 }
